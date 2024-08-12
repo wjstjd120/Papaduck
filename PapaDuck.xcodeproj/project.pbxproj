@@ -1,0 +1,441 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		748EE0202C69F214000B74DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE01F2C69F214000B74DB /* AppDelegate.swift */; };
+		748EE0222C69F214000B74DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE0212C69F214000B74DB /* SceneDelegate.swift */; };
+		748EE0242C69F214000B74DB /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE0232C69F214000B74DB /* MainController.swift */; };
+		748EE02A2C69F214000B74DB /* PapaDuck.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 748EE0282C69F214000B74DB /* PapaDuck.xcdatamodeld */; };
+		748EE02C2C69F218000B74DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 748EE02B2C69F218000B74DB /* Assets.xcassets */; };
+		748EE02F2C69F218000B74DB /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 748EE02E2C69F218000B74DB /* Base */; };
+		748EE0382C69F2D4000B74DB /* TabBarContorller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE0372C69F2D4000B74DB /* TabBarContorller.swift */; };
+		748EE03D2C69F4F1000B74DB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE03C2C69F4F1000B74DB /* NetworkManager.swift */; };
+		748EE03F2C69F504000B74DB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE03E2C69F504000B74DB /* Model.swift */; };
+		748EE0412C69F50C000B74DB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE0402C69F50C000B74DB /* MainView.swift */; };
+		748EE0462C69F657000B74DB /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE0452C69F657000B74DB /* Fonts.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		748EE01C2C69F214000B74DB /* PapaDuck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PapaDuck.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		748EE01F2C69F214000B74DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		748EE0212C69F214000B74DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		748EE0232C69F214000B74DB /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		748EE0292C69F214000B74DB /* PapaDuck.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PapaDuck.xcdatamodel; sourceTree = "<group>"; };
+		748EE02B2C69F218000B74DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		748EE02E2C69F218000B74DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		748EE0302C69F218000B74DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		748EE0372C69F2D4000B74DB /* TabBarContorller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarContorller.swift; sourceTree = "<group>"; };
+		748EE03C2C69F4F1000B74DB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		748EE03E2C69F504000B74DB /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		748EE0402C69F50C000B74DB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		748EE0442C69F596000B74DB /* PeoplefirstNeat&LoudTTF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PeoplefirstNeat&LoudTTF.ttf"; sourceTree = "<group>"; };
+		748EE0452C69F657000B74DB /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		748EE0472C69F704000B74DB /* LINESeedKR-Rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LINESeedKR-Rg.ttf"; sourceTree = "<group>"; };
+		748EE0482C69F704000B74DB /* LINESeedKR-Bd.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LINESeedKR-Bd.ttf"; sourceTree = "<group>"; };
+		748EE0492C69F70C000B74DB /* ChangwonDangamAsac-Bold_0712.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChangwonDangamAsac-Bold_0712.ttf"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		748EE0192C69F214000B74DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		748EE0132C69F214000B74DB = {
+			isa = PBXGroup;
+			children = (
+				748EE01E2C69F214000B74DB /* PapaDuck */,
+				748EE01D2C69F214000B74DB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		748EE01D2C69F214000B74DB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				748EE01C2C69F214000B74DB /* PapaDuck.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		748EE01E2C69F214000B74DB /* PapaDuck */ = {
+			isa = PBXGroup;
+			children = (
+				748EE0422C69F587000B74DB /* Font */,
+				748EE03B2C69F4D5000B74DB /* Common */,
+				748EE03A2C69F4C9000B74DB /* Model */,
+				748EE0392C69F4C1000B74DB /* View */,
+				748EE0362C69F2BC000B74DB /* Controller */,
+				748EE01F2C69F214000B74DB /* AppDelegate.swift */,
+				748EE0212C69F214000B74DB /* SceneDelegate.swift */,
+				748EE02B2C69F218000B74DB /* Assets.xcassets */,
+				748EE02D2C69F218000B74DB /* LaunchScreen.storyboard */,
+				748EE0302C69F218000B74DB /* Info.plist */,
+				748EE0282C69F214000B74DB /* PapaDuck.xcdatamodeld */,
+			);
+			path = PapaDuck;
+			sourceTree = "<group>";
+		};
+		748EE0362C69F2BC000B74DB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				748EE0232C69F214000B74DB /* MainController.swift */,
+				748EE0372C69F2D4000B74DB /* TabBarContorller.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		748EE0392C69F4C1000B74DB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				748EE0402C69F50C000B74DB /* MainView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		748EE03A2C69F4C9000B74DB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				748EE03E2C69F504000B74DB /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		748EE03B2C69F4D5000B74DB /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				748EE03C2C69F4F1000B74DB /* NetworkManager.swift */,
+				748EE0452C69F657000B74DB /* Fonts.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		748EE0422C69F587000B74DB /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				748EE0482C69F704000B74DB /* LINESeedKR-Bd.ttf */,
+				748EE0472C69F704000B74DB /* LINESeedKR-Rg.ttf */,
+				748EE0492C69F70C000B74DB /* ChangwonDangamAsac-Bold_0712.ttf */,
+				748EE0442C69F596000B74DB /* PeoplefirstNeat&LoudTTF.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		748EE01B2C69F214000B74DB /* PapaDuck */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 748EE0332C69F218000B74DB /* Build configuration list for PBXNativeTarget "PapaDuck" */;
+			buildPhases = (
+				748EE0182C69F214000B74DB /* Sources */,
+				748EE0192C69F214000B74DB /* Frameworks */,
+				748EE01A2C69F214000B74DB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PapaDuck;
+			productName = PapaDuck;
+			productReference = 748EE01C2C69F214000B74DB /* PapaDuck.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		748EE0142C69F214000B74DB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					748EE01B2C69F214000B74DB = {
+						CreatedOnToolsVersion = 15.4;
+					};
+				};
+			};
+			buildConfigurationList = 748EE0172C69F214000B74DB /* Build configuration list for PBXProject "PapaDuck" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 748EE0132C69F214000B74DB;
+			productRefGroup = 748EE01D2C69F214000B74DB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				748EE01B2C69F214000B74DB /* PapaDuck */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		748EE01A2C69F214000B74DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				748EE02C2C69F218000B74DB /* Assets.xcassets in Resources */,
+				748EE02F2C69F218000B74DB /* Base in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		748EE0182C69F214000B74DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				748EE03F2C69F504000B74DB /* Model.swift in Sources */,
+				748EE0412C69F50C000B74DB /* MainView.swift in Sources */,
+				748EE03D2C69F4F1000B74DB /* NetworkManager.swift in Sources */,
+				748EE0242C69F214000B74DB /* MainController.swift in Sources */,
+				748EE0202C69F214000B74DB /* AppDelegate.swift in Sources */,
+				748EE0382C69F2D4000B74DB /* TabBarContorller.swift in Sources */,
+				748EE02A2C69F214000B74DB /* PapaDuck.xcdatamodeld in Sources */,
+				748EE0462C69F657000B74DB /* Fonts.swift in Sources */,
+				748EE0222C69F214000B74DB /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		748EE02D2C69F218000B74DB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				748EE02E2C69F218000B74DB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		748EE0312C69F218000B74DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		748EE0322C69F218000B74DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		748EE0342C69F218000B74DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P9KD2K67FZ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PapaDuck/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wjstjd120.PapaDuck;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		748EE0352C69F218000B74DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P9KD2K67FZ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PapaDuck/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wjstjd120.PapaDuck;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		748EE0172C69F214000B74DB /* Build configuration list for PBXProject "PapaDuck" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				748EE0312C69F218000B74DB /* Debug */,
+				748EE0322C69F218000B74DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		748EE0332C69F218000B74DB /* Build configuration list for PBXNativeTarget "PapaDuck" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				748EE0342C69F218000B74DB /* Debug */,
+				748EE0352C69F218000B74DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		748EE0282C69F214000B74DB /* PapaDuck.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				748EE0292C69F214000B74DB /* PapaDuck.xcdatamodel */,
+			);
+			currentVersion = 748EE0292C69F214000B74DB /* PapaDuck.xcdatamodel */;
+			path = PapaDuck.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 748EE0142C69F214000B74DB /* Project object */;
+}
