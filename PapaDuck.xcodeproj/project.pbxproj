@@ -18,6 +18,7 @@
 		748EE03F2C69F504000B74DB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE03E2C69F504000B74DB /* Model.swift */; };
 		748EE0412C69F50C000B74DB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE0402C69F50C000B74DB /* MainView.swift */; };
 		748EE0462C69F657000B74DB /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE0452C69F657000B74DB /* Fonts.swift */; };
+		748EE04C2C69F960000B74DB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 748EE04B2C69F960000B74DB /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				748EE04C2C69F960000B74DB /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +148,9 @@
 			dependencies = (
 			);
 			name = PapaDuck;
+			packageProductDependencies = (
+				748EE04B2C69F960000B74DB /* SnapKit */,
+			);
 			productName = PapaDuck;
 			productReference = 748EE01C2C69F214000B74DB /* PapaDuck.app */;
 			productType = "com.apple.product-type.application";
@@ -174,6 +179,9 @@
 				Base,
 			);
 			mainGroup = 748EE0132C69F214000B74DB;
+			packageReferences = (
+				748EE04A2C69F960000B74DB /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 748EE01D2C69F214000B74DB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -423,6 +431,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		748EE04A2C69F960000B74DB /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		748EE04B2C69F960000B74DB /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 748EE04A2C69F960000B74DB /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		748EE0282C69F214000B74DB /* PapaDuck.xcdatamodeld */ = {
