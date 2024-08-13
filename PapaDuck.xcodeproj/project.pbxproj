@@ -27,6 +27,8 @@
 		748EE0412C69F50C000B74DB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE0402C69F50C000B74DB /* MainView.swift */; };
 		748EE0462C69F657000B74DB /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE0452C69F657000B74DB /* Fonts.swift */; };
 		748EE04C2C69F960000B74DB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 748EE04B2C69F960000B74DB /* SnapKit */; };
+		748EE04E2C6B0647000B74DB /* MemorizeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE04D2C6B0647000B74DB /* MemorizeController.swift */; };
+		748EE0502C6B0673000B74DB /* MemorizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE04F2C6B0673000B74DB /* MemorizeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +57,8 @@
 		748EE0472C69F704000B74DB /* LINESeedKR-Rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LINESeedKR-Rg.ttf"; sourceTree = "<group>"; };
 		748EE0482C69F704000B74DB /* LINESeedKR-Bd.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LINESeedKR-Bd.ttf"; sourceTree = "<group>"; };
 		748EE0492C69F70C000B74DB /* ChangwonDangamAsac-Bold_0712.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChangwonDangamAsac-Bold_0712.ttf"; sourceTree = "<group>"; };
+		748EE04D2C6B0647000B74DB /* MemorizeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeController.swift; sourceTree = "<group>"; };
+		748EE04F2C6B0673000B74DB /* MemorizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +133,7 @@
 				748EE0232C69F214000B74DB /* MainController.swift */,
 				748EE0372C69F2D4000B74DB /* TabBarContorller.swift */,
 				4F5920712C6AF0CA008101B3 /* CreateWordsController.swift */,
+				748EE04D2C6B0647000B74DB /* MemorizeController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -138,6 +143,7 @@
 			children = (
 				748EE0402C69F50C000B74DB /* MainView.swift */,
 				4F5920742C6AF12D008101B3 /* CreateWordsView.swift */,
+				748EE04F2C6B0673000B74DB /* MemorizeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -249,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				748EE03F2C69F504000B74DB /* Model.swift in Sources */,
+				748EE04E2C6B0647000B74DB /* MemorizeController.swift in Sources */,
 				748EE0412C69F50C000B74DB /* MainView.swift in Sources */,
 				748EE03D2C69F4F1000B74DB /* CoreDataManager.swift in Sources */,
 				748EE0242C69F214000B74DB /* MainController.swift in Sources */,
@@ -262,6 +269,7 @@
 				4F59206E2C6AED4B008101B3 /* UserEntity+CoreDataProperties.swift in Sources */,
 				748EE02A2C69F214000B74DB /* PapaDuck.xcdatamodeld in Sources */,
 				4F5920722C6AF0CA008101B3 /* CreateWordsController.swift in Sources */,
+				748EE0502C6B0673000B74DB /* MemorizeView.swift in Sources */,
 				748EE0462C69F657000B74DB /* Fonts.swift in Sources */,
 				4F5920752C6AF12D008101B3 /* CreateWordsView.swift in Sources */,
 				748EE0222C69F214000B74DB /* SceneDelegate.swift in Sources */,
