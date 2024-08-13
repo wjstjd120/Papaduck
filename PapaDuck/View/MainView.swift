@@ -79,7 +79,6 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
     }()
     
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -99,56 +98,55 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
     }
     
     private func setupConstraints() {
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(80)
-            make.leading.equalTo(logoImageView.snp.trailing).offset(20)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(80)
+            $0.leading.equalTo(logoImageView.snp.trailing).offset(20)
         }
         
-        logoImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(titleLabel)
-            make.leading.equalToSuperview().offset(40)
-            make.width.height.equalTo(50)
+        logoImageView.snp.makeConstraints {
+            $0.centerY.equalTo(titleLabel)
+            $0.leading.equalToSuperview().offset(40)
+            $0.width.height.equalTo(50)
         }
         
-        dataEmptyView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.width.equalTo(300)
-            make.height.equalTo(500)
+        dataEmptyView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.width.equalTo(300)
+            $0.height.equalTo(500)
         }
         
-        bubbleImageView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(dataEmptyView.snp.top).offset(300)
-            make.width.equalTo(200)
-            make.height.equalTo(100)
+        bubbleImageView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(dataEmptyView.snp.top).offset(300)
+            $0.width.equalTo(200)
+            $0.height.equalTo(100)
         }
         
-        addLabel.snp.makeConstraints { make in
-            make.center.equalTo(bubbleImageView.snp.center)
+        addLabel.snp.makeConstraints {
+            $0.center.equalTo(bubbleImageView.snp.center)
         }
         
-        paduckImageView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(bubbleImageView.snp.bottom).offset(20)
-            make.width.equalTo(300)
-            make.height.equalTo(200)
+        paduckImageView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(bubbleImageView.snp.bottom).offset(20)
+            $0.width.equalTo(300)
+            $0.height.equalTo(200)
         }
         
-        dataEmptyView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        dataEmptyView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
         
-        vocabularyCollectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        vocabularyCollectionView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
         
-        addVocaButton.snp.makeConstraints { make in
-            make.top.equalTo(vocabularyCollectionView.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(150)
-            make.height.equalTo(50)
+        addVocaButton.snp.makeConstraints {
+            $0.top.equalTo(vocabularyCollectionView.snp.bottom).offset(20)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(150)
+            $0.height.equalTo(50)
         }
-        
     }
     
     private func setupCollectionView() {
