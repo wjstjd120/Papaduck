@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MypageViewController: UIViewController {
+class MypageViewController: UIViewController, UICalendarViewDelegate {
     
     let mypageView = MypageView()
     
@@ -16,6 +16,7 @@ class MypageViewController: UIViewController {
         view = mypageView
         updateProgress()
         lvimageChange()
+        mypageView.calendarView.delegate = self
     }
     
     private func lvimageChange() {
@@ -37,7 +38,7 @@ class MypageViewController: UIViewController {
     }
     
     private func updateProgress() {
-        // exLabel의 텍스트를 "현재 경험치/최대 경험치"로 파싱합니다.
+        // exLabel의 텍스트를 "현재 경험치/최대 경험치"로 반환
         let experienceText = mypageView.exLabel.text?.split(separator: "/")
         guard let currentExp = experienceText?.first, let maxExp = experienceText?.last,
               let currentExpValue = Float(currentExp), let maxExpValue = Float(maxExp) else {
@@ -54,9 +55,10 @@ class MypageViewController: UIViewController {
                 mypageView.lvLabel.text = "Lv.\(currentLevel + 1)"
             }
             
-            // 경험치 초기화
+            // 경험치 초기화후 레벨업
             mypageView.exLabel.text = "0/\(Int(maxExpValue + 100))" // 경험치 최대치도 증가한다고 가정
             mypageView.exProgressView.progress = 0
+            lvimageChange()
         }
         
         // 경험치 증가 메서드를 추가하여 사용자가 경험치를 얻을 때 호출하는 것
