@@ -22,6 +22,8 @@
 		748EE0412C69F50C000B74DB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE0402C69F50C000B74DB /* MainView.swift */; };
 		748EE0462C69F657000B74DB /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE0452C69F657000B74DB /* Fonts.swift */; };
 		748EE04C2C69F960000B74DB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 748EE04B2C69F960000B74DB /* SnapKit */; };
+		748EE04E2C6B0647000B74DB /* MemorizeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE04D2C6B0647000B74DB /* MemorizeController.swift */; };
+		748EE0502C6B0673000B74DB /* MemorizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE04F2C6B0673000B74DB /* MemorizeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		748EE0472C69F704000B74DB /* LINESeedKR-Rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LINESeedKR-Rg.ttf"; sourceTree = "<group>"; };
 		748EE0482C69F704000B74DB /* LINESeedKR-Bd.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LINESeedKR-Bd.ttf"; sourceTree = "<group>"; };
 		748EE0492C69F70C000B74DB /* ChangwonDangamAsac-Bold_0712.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChangwonDangamAsac-Bold_0712.ttf"; sourceTree = "<group>"; };
+		748EE04D2C6B0647000B74DB /* MemorizeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeController.swift; sourceTree = "<group>"; };
+		748EE04F2C6B0673000B74DB /* MemorizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,7 @@
 				748EE0232C69F214000B74DB /* MainController.swift */,
 				748EE0372C69F2D4000B74DB /* TabBarContorller.swift */,
 				56CBA8B92C6AEE8C0076E283 /* WordListViewController.swift */,
+				748EE04D2C6B0647000B74DB /* MemorizeController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -109,6 +114,7 @@
 				748EE0402C69F50C000B74DB /* MainView.swift */,
 				56CBA8BB2C6AFB150076E283 /* WordTableViewCell.swift */,
 				56CBA8BD2C6B0BDF0076E283 /* WordListView.swift */,
+				748EE04F2C6B0673000B74DB /* MemorizeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -219,6 +225,7 @@
 			files = (
 				56CBA8BC2C6AFB150076E283 /* WordTableViewCell.swift in Sources */,
 				748EE03F2C69F504000B74DB /* Model.swift in Sources */,
+				748EE04E2C6B0647000B74DB /* MemorizeController.swift in Sources */,
 				748EE0412C69F50C000B74DB /* MainView.swift in Sources */,
 				56CBA8BA2C6AEE8C0076E283 /* WordListViewController.swift in Sources */,
 				56CBA8BE2C6B0BDF0076E283 /* WordListView.swift in Sources */,
@@ -227,6 +234,7 @@
 				748EE0202C69F214000B74DB /* AppDelegate.swift in Sources */,
 				748EE0382C69F2D4000B74DB /* TabBarContorller.swift in Sources */,
 				748EE02A2C69F214000B74DB /* PapaDuck.xcdatamodeld in Sources */,
+				748EE0502C6B0673000B74DB /* MemorizeView.swift in Sources */,
 				748EE0462C69F657000B74DB /* Fonts.swift in Sources */,
 				748EE0222C69F214000B74DB /* SceneDelegate.swift in Sources */,
 			);
