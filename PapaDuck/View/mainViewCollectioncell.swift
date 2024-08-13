@@ -2,7 +2,7 @@
 //  mainViewCollectioncell.swift
 //  PapaDuck
 //
-//  Created by t2024-m0153 on 8/13/24.
+//  Created by 이주희 on 8/13/24.
 //
 
 import UIKit

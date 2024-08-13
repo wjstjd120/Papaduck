@@ -9,6 +9,7 @@
 // 단어장 있을때,
 // 단어장 없을때, 파덕이미지뷰, 말풍선 이미지뷰
 // 말풍선 이미지 뷰 액션 > 단어장 추가 뷰컨으로 이동
+
 import UIKit
 import SnapKit
 
@@ -30,6 +31,7 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
+    
     
     private let bubbleImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "bubble"))
@@ -57,6 +59,7 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
         return view
     }()
     
+    
     private let vocabularyCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -75,13 +78,14 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
         return view
     }()
     
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
         setupConstraints()
         setupCollectionView()
     }
-    
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -97,12 +101,12 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
     private func setupConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(80)
-            make.centerX.equalToSuperview()
+            make.leading.equalTo(logoImageView.snp.trailing).offset(20)
         }
         
         logoImageView.snp.makeConstraints { make in
             make.centerY.equalTo(titleLabel)
-            make.trailing.equalTo(titleLabel.snp.leading).offset(-10)
+            make.leading.equalToSuperview().offset(40)
             make.width.height.equalTo(50)
         }
         
