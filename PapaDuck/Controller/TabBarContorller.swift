@@ -19,7 +19,7 @@ class TabBarContorller: UITabBarController {
     }()
     
     lazy var mypageController: UINavigationController = {
-        let controller = MainController()
+        let controller = MypageViewController()
         let navigationController = UINavigationController(rootViewController: (controller))
         navigationController.tabBarItem.image = UIImage(systemName: "person.fill")
         navigationController.tabBarItem.title = "마이페이지"
