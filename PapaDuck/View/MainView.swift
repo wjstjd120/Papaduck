@@ -66,6 +66,7 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
     
     private let addVocaButton: UIButton = {
         let button = UIButton()
+        button.tintColor = UIColor.mainYellow
         return button
     }()
     
@@ -107,14 +108,13 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
         
         dataEmptyView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.top.equalToSuperview().offset(240)
-            make.width.equalToSuperview().multipliedBy(0.8)
-            make.height.equalToSuperview().multipliedBy(0.6)
+            make.width.equalTo(300)
+            make.height.equalTo(500)
         }
         
         bubbleImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(dataEmptyView.snp.top).offset(20)
+            make.top.equalTo(dataEmptyView.snp.top).offset(300)
             make.width.equalTo(200)
             make.height.equalTo(100)
         }
