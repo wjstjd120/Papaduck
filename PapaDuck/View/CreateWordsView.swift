@@ -13,14 +13,13 @@ class CreateWordsView: UIView{
         let label = UILabel()
         label.text = "단어장 추가"
         label.font = FontNames.mainFont.font()
-        label.font = .systemFont(ofSize: 50)
         label.textAlignment = .center
         return label
     }()
     let wordsBookLabel: UILabel = {
         let label = UILabel()
         label.text = "단어장 이름"
-        label.font = FontNames.mainFont.font()
+        label.font = FontNames.subFont2.font()
         label.textColor = .lightGray
         return label
     }()
@@ -41,7 +40,7 @@ class CreateWordsView: UIView{
     let explanationLabel: UILabel = {
         let label = UILabel()
         label.text = "설명"
-        label.font = FontNames.mainFont.font()
+        label.font = FontNames.subFont2.font()
         label.textColor = .lightGray
         return label
     }()
@@ -65,6 +64,7 @@ class CreateWordsView: UIView{
         super.init(frame: frame)
         backgroundColor = .white
         configureUI()
+        setupTapGesture()
     }
     
     required init?(coder: NSCoder) {
@@ -110,5 +110,14 @@ class CreateWordsView: UIView{
             $0.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-20)
             $0.height.equalTo(60)
         }
+    }
+    private func setupTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        addGestureRecognizer(tapGesture)
+    }
+
+    @objc func dismissKeyboard() {
+        endEditing(true)
     }
 }
