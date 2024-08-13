@@ -14,6 +14,7 @@ class TabBarContorller: UITabBarController {
         let navigationController = UINavigationController(rootViewController: controller)
         navigationController.tabBarItem.image = UIImage(systemName: "house")
         navigationController.tabBarItem.title = "메인페이지"
+        controller.view.backgroundColor = .white
         return navigationController
     }()
     

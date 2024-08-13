@@ -4,10 +4,10 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>PeoplefirstNeat&amp;LoudTTF.ttf</string>
-		<string>LINESeedKR-Bd.ttf</string>
-		<string>LINESeedKR-Rg.ttf</string>
-		<string>ChangwonDangamAsac-Bold_0712.ttf</string>
+		<string>Peoplefirst Neat&amp;Loud TTF.ttf</string>
+		<string>LINESeedSansKR-Bold.ttf</string>
+		<string>LINESeedSansKR-Regular.ttf</string>
+		<string>ChangwonDangamAsac.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

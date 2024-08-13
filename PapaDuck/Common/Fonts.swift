@@ -17,12 +17,13 @@ struct Font {
 }
 
 struct FontNames {
-    static let mainFont: Font = Font(name: "ChangwonDangamAsac-Bold", size: 25.0)
-    static let mainFont2: Font = Font(name: "ChangwonDangamAsac-Bold", size: 20.0)
+    static let mainFont: Font = Font(name: "ChangwonDangamAsac", size: 40.0)
+    static let mainFont2: Font = Font(name: "ChangwonDangamAsac", size: 30.0)
+    static let mainFont3: Font = Font(name: "ChangwonDangamAsac", size: 20.0)
     
-    static let main2Font: Font = Font(name: "PeoplefirstNeat&Loud", size: 20.0)
-    static let main2Font2: Font = Font(name: "PeoplefirstNeat&Loud", size: 16.0)
-    static let main2Font3: Font = Font(name: "PeoplefirstNeat&Loud", size: 14.0)
+    static let main2Font: Font = Font(name: "Peoplefirst Neat&Loud TTF", size: 24.0)
+    static let main2Font2: Font = Font(name: "Peoplefirst Neat&Loud TTF", size: 20.0)
+    static let main2Font3: Font = Font(name: "Peoplefirst Neat&Loud TTF", size: 16.0)
     
     static let subFont: Font = Font(name: "LINESeedSansKR-Bold", size: 30.0)
     static let subFont2: Font = Font(name: "LINESeedSansKR-Bold", size: 20.0)
@@ -43,4 +44,5 @@ struct FontNames {
             (thinFont.font(), thinFont.name, thinFont.size)
         ]
     }
+    
 }
