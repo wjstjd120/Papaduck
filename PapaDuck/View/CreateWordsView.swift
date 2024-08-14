@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 import SnapKit
 class CreateWordsView: UIView{
+    let paddingView1 = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 44))
+    let paddingView2 = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 44))
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "단어장 추가"
@@ -25,7 +27,7 @@ class CreateWordsView: UIView{
     }()
     let wordsBookNameTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "  단어장 이름을 입력하세요"
+        textField.placeholder = "단어장 이름을 입력하세요"
         textField.layer.cornerRadius = 20
         textField.layer.borderColor = UIColor.black.cgColor
         textField.layer.borderWidth = 1.0
@@ -46,7 +48,7 @@ class CreateWordsView: UIView{
     }()
     let explanationTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "  단어장에 대한 설명을 적어주세요"
+        textField.placeholder = "단어장에 대한 설명을 적어주세요"
         textField.layer.cornerRadius = 20
         textField.layer.borderColor = UIColor.black.cgColor
         textField.layer.borderWidth = 1.0
@@ -75,6 +77,11 @@ class CreateWordsView: UIView{
         [titleLabel, wordsBookLabel, wordsBookNameTextField, explanationLabel, explanationTextField, saveButton, errorLabel].forEach {
             addSubview($0)
         }
+        errorLabel.isHidden = false
+        wordsBookNameTextField.leftView = paddingView1
+        wordsBookNameTextField.leftViewMode = .always
+        explanationTextField.leftView = paddingView2
+        explanationTextField.leftViewMode = .always
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
             $0.centerX.equalTo(safeAreaLayoutGuide.snp.centerX)
@@ -109,6 +116,11 @@ class CreateWordsView: UIView{
             $0.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(20)
             $0.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-20)
             $0.height.equalTo(60)
+        }
+        errorLabel.snp.makeConstraints {
+            $0.top.equalTo(wordsBookNameTextField.snp.bottom).offset(5)
+            $0.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(20)
+            $0.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-20)
         }
     }
     private func setupTapGesture() {
