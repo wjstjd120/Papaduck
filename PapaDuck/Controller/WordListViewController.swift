@@ -6,19 +6,18 @@
 //
 
 import UIKit
+import CoreData
 
 class WordListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private let wordListView = WordListView()
-    var selectedBook: WordsBookEntity?
+    var selectedBook: WordsBookEntity? {
+        didSet {
+            updateUIWithSelectedBook()
+        }
+    }
     
-    // 더미 데이터 - 테스트
-    private var words: [Word] = [
-        Word(word: "Apple", meaning: "사과", isMemorized: true),
-        Word(word: "Banana", meaning: "바나나", isMemorized: false),
-        Word(word: "Car", meaning: "자동차", isMemorized: false),
-        Word(word: "Dog", meaning: "개", isMemorized: true)
-    ]
+    private var words: [WordsEntity] = []
     
     
     override func loadView() {
@@ -27,6 +26,7 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         
         
         let addBarButton = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(addWord))
@@ -35,6 +35,35 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
         wordListView.tableView.delegate = self
         wordListView.tableView.dataSource = self
         wordListView.playButton.addTarget(self, action: #selector(playWord), for: .touchUpInside)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let book = selectedBook {
+            loadWordsFromSelectedBook(book)
+        }
+    }
+    
+    private func updateUIWithSelectedBook() {
+        if let book = selectedBook {
+            self.navigationItem.title = book.wordsBookName ?? "Unknown"
+            loadWordsFromSelectedBook(book)
+        }
+    }
+    
+    private func loadWordsFromSelectedBook(_ book: WordsBookEntity) {
+        // CoreData에서 단어장 단어 불러오기
+        let fetchRequest: NSFetchRequest<WordsEntity> = WordsEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "wordsBookId == %@", book.wordsBookId! as any CVarArg as CVarArg)
+        
+        do {
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            words = try context.fetch(fetchRequest)
+            wordListView.tableView.reloadData()
+        } catch {
+            print("Failed to fetch words: \(error)")
+        }
     }
     
     @objc func addWord() {
@@ -65,8 +94,8 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
         let word = words[indexPath.row]
         cell.wordLabel.text = word.word
         cell.meaningLabel.text = word.meaning
-        cell.memorizeLabel.text = word.isMemorized ? "암기" : "미암기"
-        cell.memorizeLabel.textColor = word.isMemorized ? UIColor.green : UIColor.red
+        cell.memorizeLabel.text = word.memorizationYn ? "암기" : "미암기"
+        cell.memorizeLabel.textColor = word.memorizationYn ? UIColor.green : UIColor.red
         
         return cell
     }
