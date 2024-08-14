@@ -198,9 +198,9 @@ class MypageView: UIView {
         
         calendarView.snp.makeConstraints{
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(layOutStackView.snp.bottom).offset(30)
+            $0.top.equalTo(layOutStackView.snp.bottom).offset(10)
             $0.width.equalTo(320)
-            $0.height.equalTo(380)
+            $0.height.equalTo(450)
         }
     }
 }
