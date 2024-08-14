@@ -14,7 +14,7 @@ import UIKit
 import SnapKit
 
 protocol MainViewDelegate: AnyObject {
-    func mainView(_ mainView: MainView, didSelectBook book: WordsBookModel)
+    func mainView(_ mainView: MainView, didSelectBook book: WordsBookEntity)
     func mainViewDidRequestAddWord(_ mainView: MainView)
 }
 
@@ -22,7 +22,7 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
     
     weak var delegate: MainViewDelegate?
     
-    private var data = [WordsBookModel]()
+    private var data = [WordsBookEntity]()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -63,7 +63,7 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
     
     private let dataEmptyView: UIView = {
         let view = UIView()
-        view.backgroundColor = .red
+        view.backgroundColor = .clear
         return view
     }()
     
@@ -81,6 +81,7 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
         button.setTitle("단어장 추가", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 8
+        button.addTarget(self, action: #selector(didTapAddVocaButton), for: .touchUpInside)
         return button
     }()
     
@@ -187,8 +188,8 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
             addVocaButton.snp.makeConstraints {
                 $0.bottom.equalToSuperview()
                 $0.height.equalTo(50)
-                $0.leading.equalToSuperview().offset(16)
-                $0.trailing.equalToSuperview().offset(-16)
+                $0.leading.equalToSuperview()
+                $0.trailing.equalToSuperview()
             }
             
             return cell
@@ -203,24 +204,28 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
     // MARK: - UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.row == data.count {
-            return CGSize(width: collectionView.bounds.width - 32, height: 50) // Adjust height as needed
+            return CGSize(width: collectionView.bounds.width - 32, height: 50)
         } else {
-            return CGSize(width: collectionView.bounds.width - 32, height: 100) // Adjust height as needed
+            return CGSize(width: collectionView.bounds.width - 32, height: 100)
         }
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-           if indexPath.row == data.count {
-               print("단어장 추가 버튼 클릭")
-               delegate?.mainViewDidRequestAddWord(self)
-           } else {
-               print("셀 클릭됨")
-               let selectedBook = data[indexPath.row]
-               delegate?.mainView(self, didSelectBook: selectedBook)
-           }
-       }
+        if indexPath.row == data.count {
+            delegate?.mainViewDidRequestAddWord(self)
+        } else {
+            print("셀 클릭됨")
+            let selectedBook = data[indexPath.row]
+            delegate?.mainView(self, didSelectBook: selectedBook)
+        }
+    }
     
+    @objc private func didTapAddVocaButton() {
+        print("단어장 추가 클릭됨")
+        delegate?.mainViewDidRequestAddWord(self)
+    }
     
-    func setData(_ data: [WordsBookModel]) {
+    func setData(_ data: [WordsBookEntity]) {
         self.data = data
         updateView(forDataAvailability: !data.isEmpty)
         vocabularyCollectionView.reloadData()

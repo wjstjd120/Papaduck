@@ -10,7 +10,7 @@ import UIKit
 class WordListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private let wordListView = WordListView()
-    var selectedBook: WordsBookModel?
+    var selectedBook: WordsBookEntity?
     
     // 더미 데이터 - 테스트
     private var words: [Word] = [
@@ -20,12 +20,14 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
         Word(word: "Dog", meaning: "개", isMemorized: true)
     ]
     
+    
     override func loadView() {
         self.view = wordListView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         let addBarButton = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(addWord))
         navigationItem.rightBarButtonItem = addBarButton
@@ -36,9 +38,15 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @objc func addWord() {
-        let createWordsController = CreateWordsController()
-        createWordsController.setCreateWord(wordBookId: UUID(), wordBookName: "TEST")
-        navigationController?.pushViewController(createWordsController, animated: true)
+        if let book = selectedBook {
+            // selectedBook을 사용하여 UI 업데이트
+            print("Selected Book Name: \(book.wordsBookName ?? "Unknown")")
+            print("Selected Book Explanation: \(book.wordsExplain ?? "Unknown")")
+            
+            let createWordsController = CreateWordsController()
+            createWordsController.setCreateWord(wordBookId: book.wordsBookId ?? UUID(), wordBookName: book.wordsBookName ?? "")
+            navigationController?.pushViewController(createWordsController, animated: true)
+        }
     }
     
     @objc func playWord() {
@@ -64,9 +72,9 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
     }
 }
 
-#Preview("WordListViewController") {
-WordListViewController()
-}
+//#Preview("WordListViewController") {
+//    WordListViewController()
+//}
 
 
 // 화면 UI구성먼저
