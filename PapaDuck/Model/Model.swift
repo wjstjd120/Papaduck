@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+// 테스트용
+struct Word {
+    let word: String
+    let meaning: String
+    let isMemorized: Bool
+}

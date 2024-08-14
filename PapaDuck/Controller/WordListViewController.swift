@@ -11,6 +11,14 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
     
     private let wordListView = WordListView()
     
+    // 더미 데이터 - 테스트
+    private var words: [Word] = [
+        Word(word: "Apple", meaning: "사과", isMemorized: true),
+        Word(word: "Banana", meaning: "바나나", isMemorized: false),
+        Word(word: "Car", meaning: "자동차", isMemorized: false),
+        Word(word: "Dog", meaning: "개", isMemorized: true)
+    ]
+    
     override func loadView() {
         self.view = wordListView
     }
@@ -35,16 +43,27 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10 // 수정
+        return words.count // 수정
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
-        cell.textLabel?.text = "예제 단어 \(indexPath.row + 1)" // 예제 데이터, 실제 데이터로 변경 필요
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as? WordTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        let word = words[indexPath.row]
+        cell.wordLabel.text = word.word
+        cell.meaningLabel.text = word.meaning
+        cell.memorizeLabel.text = word.isMemorized ? "암기" : "미암기"
+        cell.memorizeLabel.textColor = word.isMemorized ? UIColor.green : UIColor.red
+        
         return cell
     }
 }
 
+#Preview("WordListViewController") {
+WordListViewController()
+}
 
 
 // 화면 UI구성먼저
