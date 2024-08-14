@@ -33,12 +33,12 @@ class CreateWordsController: UIViewController{
     
     /// 단어장을 저장하는 메서드
     @objc func saveBook(){
-        bookCoreData.saveWordsBooks(wordsBookName: createWordsView.wordsBookNameTextField.text!, wordsExplain: createWordsView.wordsBookNameTextField.text ?? "")
+        bookCoreData.saveWordsBooks(wordsBookName: createWordsView.wordsBookNameTextField.text!, wordsExplain: createWordsView.explanationTextField.text ?? "")
     }
     
     /// 단어를 저장하는 메서드
     @objc func saveWord(){
-        wordCoreData.saveWords(wordsBookId: wordBookUUID, word: createWordsView.wordsBookNameTextField.text!, meaning: createWordsView.wordsBookNameTextField.text ?? "")
+        wordCoreData.saveWords(wordsBookId: wordBookUUID, word: createWordsView.wordsBookNameTextField.text!, meaning: createWordsView.explanationTextField.text ?? "")
     }
     
     /// 단어 저장하기 위해서 프로퍼티 변경
