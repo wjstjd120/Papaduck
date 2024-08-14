@@ -8,20 +8,20 @@ import UIKit
 
 class CircularProgressBar: UIView {
     
-    private let lineWidth: CGFloat = 4  // Line width increased for better visibility
+    private let lineWidth: CGFloat = 4
 
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
         let path = UIBezierPath()
-        let radius = (rect.width - lineWidth) / 2  // Adjust radius based on lineWidth
+        let radius = (rect.width - lineWidth) / 2
         path.addArc(withCenter: CGPoint(x: rect.midX, y: rect.midY),
                     radius: radius,
                     startAngle: 0,
                     endAngle: 2 * .pi,
                     clockwise: true)
         path.lineWidth = lineWidth
-        UIColor.lightGray.set()  // Background color of the progress bar
+        UIColor.lightGray.set()
         path.stroke()
     }
     
@@ -48,7 +48,6 @@ class CircularProgressBar: UIView {
         
         self.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         self.layer.addSublayer(circularLayer)
-        
-        self.frame = rect  // This should be handled correctly in layoutSubviews if needed
+
     }
 }
