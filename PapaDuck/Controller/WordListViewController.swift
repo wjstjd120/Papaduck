@@ -10,6 +10,7 @@ import UIKit
 class WordListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private let wordListView = WordListView()
+    var selectedBook: WordsBookModel?
     
     override func loadView() {
         self.view = wordListView

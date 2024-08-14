@@ -13,9 +13,16 @@
 import UIKit
 import SnapKit
 
+protocol MainViewDelegate: AnyObject {
+    func mainView(_ mainView: MainView, didSelectBook book: WordsBookModel)
+    func mainViewDidRequestAddWord(_ mainView: MainView)
+}
+
 class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
-        
-    private let data = [String]()
+    
+    weak var delegate: MainViewDelegate?
+    
+    private var data = [WordsBookModel]()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -56,6 +63,7 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
     
     private let dataEmptyView: UIView = {
         let view = UIView()
+        view.backgroundColor = .red
         return view
     }()
     
@@ -69,7 +77,10 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
     
     private let addVocaButton: UIButton = {
         let button = UIButton()
-        button.tintColor = UIColor.mainYellow
+        button.backgroundColor = UIColor.mainYellow
+        button.setTitle("단어장 추가", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 8
         return button
     }()
     
@@ -109,10 +120,22 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
             $0.width.height.equalTo(50)
         }
         
+        dataStateView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
+            $0.bottom.equalToSuperview().offset(-60)
+            
+        }
+        
+        vocabularyCollectionView.snp.makeConstraints {
+            $0.top.leading.trailing.equalTo(dataStateView)
+            $0.bottom.equalTo(dataStateView.snp.bottom).offset(-20)
+            
+        }
+        
         dataEmptyView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.equalTo(300)
-            $0.height.equalTo(500)
+            $0.edges.equalToSuperview()
         }
         
         bubbleImageView.snp.makeConstraints {
@@ -132,53 +155,74 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
             $0.width.equalTo(300)
             $0.height.equalTo(200)
         }
-        
-        dataEmptyView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
-        vocabularyCollectionView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
-        addVocaButton.snp.makeConstraints {
-            $0.top.equalTo(vocabularyCollectionView.snp.bottom).offset(20)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(150)
-            $0.height.equalTo(50)
-        }
     }
     
     private func setupCollectionView() {
         vocabularyCollectionView.dataSource = self
         vocabularyCollectionView.delegate = self
-        vocabularyCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "mainViewCollectioncell")
+        vocabularyCollectionView.register(VocaCollectionCell.self, forCellWithReuseIdentifier: "mainViewCollectioncell")
+        vocabularyCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "addVocaCell") // Register addVocaCell
     }
     
     func updateView(forDataAvailability hasData: Bool) {
         if hasData {
             dataEmptyView.isHidden = true
-            vocabularyCollectionView.isHidden = false
+            dataStateView.isHidden = false
         } else {
             dataEmptyView.isHidden = false
-            vocabularyCollectionView.isHidden = true
+            dataStateView.isHidden = true
         }
     }
     
     // MARK: - UICollectionViewDataSource
-       func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-           return data.count
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return data.count + 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.row == data.count {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "addVocaCell", for: indexPath)
+            cell.contentView.addSubview(addVocaButton)
+            
+            addVocaButton.snp.makeConstraints {
+                $0.bottom.equalToSuperview()
+                $0.height.equalTo(50)
+                $0.leading.equalToSuperview().offset(16)
+                $0.trailing.equalToSuperview().offset(-16)
+            }
+            
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mainViewCollectioncell", for: indexPath) as! VocaCollectionCell
+            let model = data[indexPath.row]
+            cell.configure(with: model)
+            return cell
+        }
+    }
+    
+    // MARK: - UICollectionViewDelegateFlowLayout
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.row == data.count {
+            return CGSize(width: collectionView.bounds.width - 32, height: 50) // Adjust height as needed
+        } else {
+            return CGSize(width: collectionView.bounds.width - 32, height: 100) // Adjust height as needed
+        }
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+           if indexPath.row == data.count {
+               print("단어장 추가 버튼 클릭")
+               delegate?.mainViewDidRequestAddWord(self)
+           } else {
+               print("셀 클릭됨")
+               let selectedBook = data[indexPath.row]
+               delegate?.mainView(self, didSelectBook: selectedBook)
+           }
        }
-
-       func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mainViewCollectioncell", for: indexPath)
-           cell.backgroundColor = .lightGray
-           return cell
-       }
-       
-       // MARK: - UICollectionViewDelegateFlowLayout
-       func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-           return CGSize(width: collectionView.bounds.width - 20, height: 100)
-       }
+    
+    
+    func setData(_ data: [WordsBookModel]) {
+        self.data = data
+        updateView(forDataAvailability: !data.isEmpty)
+        vocabularyCollectionView.reloadData()
+    }
 }
-

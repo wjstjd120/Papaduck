@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct WordsBookModel {
+    let name: String
+    let Explain: String
+    let wordCount: String
+}
