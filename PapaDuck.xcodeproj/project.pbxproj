@@ -41,7 +41,7 @@
 		D6717F292C6AFDD400B28844 /* LINESeedSansKR-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 748EE0472C69F704000B74DB /* LINESeedSansKR-Regular.ttf */; };
 		D6717F2A2C6AFDD600B28844 /* LINESeedSansKR-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 748EE0482C69F704000B74DB /* LINESeedSansKR-Bold.ttf */; };
 		D6717F2C2C6B006500B28844 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6717F2B2C6B006500B28844 /* UIColor+Hex.swift */; };
-		D6717F2E2C6B112600B28844 /* mainViewCollectioncell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6717F2D2C6B112600B28844 /* mainViewCollectioncell.swift */; };
+		D6717F2E2C6B112600B28844 /* VocaCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6717F2D2C6B112600B28844 /* VocaCollectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,7 +80,7 @@
 		748EE04D2C6B0647000B74DB /* MemorizeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeController.swift; sourceTree = "<group>"; };
 		748EE04F2C6B0673000B74DB /* MemorizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeView.swift; sourceTree = "<group>"; };
 		D6717F2B2C6B006500B28844 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
-		D6717F2D2C6B112600B28844 /* mainViewCollectioncell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainViewCollectioncell.swift; sourceTree = "<group>"; };
+		D6717F2D2C6B112600B28844 /* VocaCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocaCollectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,7 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				748EE0402C69F50C000B74DB /* MainView.swift */,
-				D6717F2D2C6B112600B28844 /* mainViewCollectioncell.swift */,
+				D6717F2D2C6B112600B28844 /* VocaCollectionCell.swift */,
 				4F5920742C6AF12D008101B3 /* CreateWordsView.swift */,
 				56CBA8BB2C6AFB150076E283 /* WordTableViewCell.swift */,
 				56CBA8BD2C6B0BDF0076E283 /* WordListView.swift */,
@@ -317,7 +317,7 @@
 				4F59206D2C6AED4B008101B3 /* UserEntity+CoreDataClass.swift in Sources */,
 				4F59206E2C6AED4B008101B3 /* UserEntity+CoreDataProperties.swift in Sources */,
 				748EE02A2C69F214000B74DB /* PapaDuck.xcdatamodeld in Sources */,
-				D6717F2E2C6B112600B28844 /* mainViewCollectioncell.swift in Sources */,
+				D6717F2E2C6B112600B28844 /* VocaCollectionCell.swift in Sources */,
 				4F5920722C6AF0CA008101B3 /* CreateWordsController.swift in Sources */,
 				748EE0502C6B0673000B74DB /* MemorizeView.swift in Sources */,
 				748EE0462C69F657000B74DB /* Fonts.swift in Sources */,

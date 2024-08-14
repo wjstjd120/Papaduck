@@ -10,6 +10,7 @@ import UIKit
 class WordListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private let wordListView = WordListView()
+    var selectedBook: WordsBookModel?
     
     // 더미 데이터 - 테스트
     private var words: [Word] = [
