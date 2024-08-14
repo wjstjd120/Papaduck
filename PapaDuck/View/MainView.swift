@@ -75,7 +75,7 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
         return collectionView
     }()
     
-    private let addVocaButton: UIButton = {
+   lazy var addVocaButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor.mainYellow
         button.setTitle("단어장 추가", for: .normal)

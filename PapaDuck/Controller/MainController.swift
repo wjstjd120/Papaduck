@@ -24,6 +24,13 @@ class MainController: UIViewController, MainViewDelegate {
         loadWordsBooks()
         printWordsBookInfos()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadWordsBooks()
+    }
+    
 
     private func addTapGestureToLabel() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleLabelTap))
@@ -37,8 +44,6 @@ class MainController: UIViewController, MainViewDelegate {
 
     func loadWordsBooks() {
          wordsBookEntities = coreData.retrieveWordsBookInfos()
-        
-//        let wordsBooks = wordsBookEntities.map { WordsBookEntity(wordsBookName: $0.wordsBookName ?? "", wordsExplain: $0.wordsExplain ?? "", wordCount: "3/30") }
         
         mainView.setData(wordsBookEntities)
     }
