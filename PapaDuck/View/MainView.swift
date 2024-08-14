@@ -14,7 +14,7 @@ import UIKit
 import SnapKit
 
 protocol MainViewDelegate: AnyObject {
-    func mainView(_ mainView: MainView, didSelectBook book: WordsBookModel)
+    func mainView(_ mainView: MainView, didSelectBook book: WordsBookEntity)
     func mainViewDidRequestAddWord(_ mainView: MainView)
 }
 
@@ -22,7 +22,7 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
     
     weak var delegate: MainViewDelegate?
     
-    private var data = [WordsBookModel]()
+    private var data = [WordsBookEntity]()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -225,7 +225,7 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
         delegate?.mainViewDidRequestAddWord(self)
     }
     
-    func setData(_ data: [WordsBookModel]) {
+    func setData(_ data: [WordsBookEntity]) {
         self.data = data
         updateView(forDataAvailability: !data.isEmpty)
         vocabularyCollectionView.reloadData()

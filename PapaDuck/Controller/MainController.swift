@@ -12,8 +12,9 @@ class MainController: UIViewController, MainViewDelegate {
 
     private let mainView = MainView()
     let coreData = WordsBookCoreDataManager()
-    var selectedBook: WordsBookModel?
-
+//    var selectedBook: WordsBookModel?
+    var wordsBookEntities: [WordsBookEntity] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view = mainView
@@ -35,11 +36,11 @@ class MainController: UIViewController, MainViewDelegate {
     }
 
     func loadWordsBooks() {
-        let wordsBookEntities = coreData.retrieveWordsBookInfos()
+         wordsBookEntities = coreData.retrieveWordsBookInfos()
         
-        let wordsBooks = wordsBookEntities.map { WordsBookModel(name: $0.wordsBookName ?? "", Explain: $0.wordsExplain ?? "", wordCount: "3/30") }
+//        let wordsBooks = wordsBookEntities.map { WordsBookEntity(wordsBookName: $0.wordsBookName ?? "", wordsExplain: $0.wordsExplain ?? "", wordCount: "3/30") }
         
-        mainView.setData(wordsBooks)
+        mainView.setData(wordsBookEntities)
     }
     
     func printWordsBookInfos() {
@@ -49,7 +50,7 @@ class MainController: UIViewController, MainViewDelegate {
         }
     }
 
-    func mainView(_ mainView: MainView, didSelectBook book: WordsBookModel) {
+    func mainView(_ mainView: MainView, didSelectBook book: WordsBookEntity) {
         let wordListViewController = WordListViewController()
         wordListViewController.selectedBook = book
         navigationController?.pushViewController(wordListViewController, animated: true)

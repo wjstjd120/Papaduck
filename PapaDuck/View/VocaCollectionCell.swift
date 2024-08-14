@@ -65,10 +65,10 @@ class VocaCollectionCell: UICollectionViewCell {
             contentView.layer.masksToBounds = true
         }
     
-    func configure(with model: WordsBookModel) {
-        vocaNameLabel.text = model.name
-        descriptionLabel.text = model.Explain
-        wordCountLabel.text = "\(model.wordCount)"
+    func configure(with model: WordsBookEntity) {
+        vocaNameLabel.text = model.wordsBookName
+        descriptionLabel.text = model.wordsExplain
+        wordCountLabel.text = "3/30"
     }
     
     
