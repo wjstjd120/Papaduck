@@ -34,8 +34,10 @@ class WordListView: UIView {
     }
     
     private func setupTableView() {
-        tableView.rowHeight = 80
+        tableView.rowHeight = 100
         tableView.register(WordTableViewCell.self, forCellReuseIdentifier: "WordCell")
+        tableView.separatorStyle = .none
+        
         addSubview(tableView)
         
         tableView.snp.makeConstraints {
