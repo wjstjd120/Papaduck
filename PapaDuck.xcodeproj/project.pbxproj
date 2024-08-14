@@ -19,6 +19,7 @@
 		4F5920752C6AF12D008101B3 /* CreateWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5920742C6AF12D008101B3 /* CreateWordsView.swift */; };
 		4F5920782C6B27A0008101B3 /* WordsCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5920772C6B27A0008101B3 /* WordsCoreDataManager.swift */; };
 		4F59207A2C6B27AD008101B3 /* UserCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5920792C6B27AD008101B3 /* UserCoreDataManager.swift */; };
+		4F59207B2C6C89BC008101B3 /* WordsBookCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE03C2C69F4F1000B74DB /* WordsBookCoreDataManager.swift */; };
 		56CBA8BA2C6AEE8C0076E283 /* WordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CBA8B92C6AEE8C0076E283 /* WordListViewController.swift */; };
 		56CBA8BC2C6AFB150076E283 /* WordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CBA8BB2C6AFB150076E283 /* WordTableViewCell.swift */; };
 		56CBA8BE2C6B0BDF0076E283 /* WordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CBA8BD2C6B0BDF0076E283 /* WordListView.swift */; };
@@ -29,7 +30,6 @@
 		748EE02C2C69F218000B74DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 748EE02B2C69F218000B74DB /* Assets.xcassets */; };
 		748EE02F2C69F218000B74DB /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 748EE02E2C69F218000B74DB /* Base */; };
 		748EE0382C69F2D4000B74DB /* TabBarContorller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE0372C69F2D4000B74DB /* TabBarContorller.swift */; };
-		748EE03D2C69F4F1000B74DB /* WordsBookCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE03C2C69F4F1000B74DB /* WordsBookCoreDataManager.swift */; };
 		748EE03F2C69F504000B74DB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE03E2C69F504000B74DB /* Model.swift */; };
 		748EE0412C69F50C000B74DB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE0402C69F50C000B74DB /* MainView.swift */; };
 		748EE0462C69F657000B74DB /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE0452C69F657000B74DB /* Fonts.swift */; };
@@ -297,15 +297,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F59207B2C6C89BC008101B3 /* WordsBookCoreDataManager.swift in Sources */,
 				56CBA8BC2C6AFB150076E283 /* WordTableViewCell.swift in Sources */,
 				748EE03F2C69F504000B74DB /* Model.swift in Sources */,
 				748EE04E2C6B0647000B74DB /* MemorizeController.swift in Sources */,
 				748EE0412C69F50C000B74DB /* MainView.swift in Sources */,
-				748EE03D2C69F4F1000B74DB /* WordsBookCoreDataManager.swift in Sources */,
 				56CBA8BA2C6AEE8C0076E283 /* WordListViewController.swift in Sources */,
 				56CBA8BE2C6B0BDF0076E283 /* WordListView.swift in Sources */,
 				4F59207A2C6B27AD008101B3 /* UserCoreDataManager.swift in Sources */,
-				748EE03D2C69F4F1000B74DB /* WordsBookCoreDataManager.swift in Sources */,
 				748EE0242C69F214000B74DB /* MainController.swift in Sources */,
 				748EE0202C69F214000B74DB /* AppDelegate.swift in Sources */,
 				748EE0382C69F2D4000B74DB /* TabBarContorller.swift in Sources */,
