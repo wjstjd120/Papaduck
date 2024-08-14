@@ -42,6 +42,7 @@
 		D6717F2A2C6AFDD600B28844 /* LINESeedSansKR-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 748EE0482C69F704000B74DB /* LINESeedSansKR-Bold.ttf */; };
 		D6717F2C2C6B006500B28844 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6717F2B2C6B006500B28844 /* UIColor+Hex.swift */; };
 		D6717F2E2C6B112600B28844 /* VocaCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6717F2D2C6B112600B28844 /* VocaCollectionCell.swift */; };
+		D6717F302C6CC34900B28844 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6717F2F2C6CC34900B28844 /* CircularProgressBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +82,7 @@
 		748EE04F2C6B0673000B74DB /* MemorizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeView.swift; sourceTree = "<group>"; };
 		D6717F2B2C6B006500B28844 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		D6717F2D2C6B112600B28844 /* VocaCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocaCollectionCell.swift; sourceTree = "<group>"; };
+		D6717F2F2C6CC34900B28844 /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 			children = (
 				748EE0402C69F50C000B74DB /* MainView.swift */,
 				D6717F2D2C6B112600B28844 /* VocaCollectionCell.swift */,
+				D6717F2F2C6CC34900B28844 /* CircularProgressBar.swift */,
 				4F5920742C6AF12D008101B3 /* CreateWordsView.swift */,
 				56CBA8BB2C6AFB150076E283 /* WordTableViewCell.swift */,
 				56CBA8BD2C6B0BDF0076E283 /* WordListView.swift */,
@@ -323,6 +326,7 @@
 				4F5920752C6AF12D008101B3 /* CreateWordsView.swift in Sources */,
 				748EE0222C69F214000B74DB /* SceneDelegate.swift in Sources */,
 				D6717F2C2C6B006500B28844 /* UIColor+Hex.swift in Sources */,
+				D6717F302C6CC34900B28844 /* CircularProgressBar.swift in Sources */,
 				144D806F2C6AE8DD00C1A1D4 /* MypageView.swift in Sources */,
 				144D80712C6AE90100C1A1D4 /* MypageViewController.swift in Sources */,
 			);
