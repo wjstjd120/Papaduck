@@ -44,4 +44,40 @@ class WordsCoreDataManager{
             return []
         }
     }
+    
+    /// 단어장에 있는 단어 전체 삭제
+    /// - Parameter wordsBookId: 단어장ID
+    func deleteAllWord(wordsBookId: UUID){
+        let fetchRequest = WordsEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "wordsBookId == %@", wordsBookId as CVarArg)
+        do{
+            let result = try self.context.fetch(fetchRequest)
+            for data in result as [NSManagedObject]{
+                self.context.delete(data)
+            }
+            try self.context.save()
+            print("삭제 성공")
+        }catch{
+            print("삭제 실패")
+        }
+    }
+    
+    /// 단어장에 있는 단어 하나 삭제 메서드
+    /// - Parameters:
+    ///   - wordsBookId: 단어장 ID
+    ///   - word: 단어
+    func deleteWord(wordsBookId: UUID, word: String){
+        let fetchRequest = WordsEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "wordsBookId == %@ AND word == %@", wordsBookId as CVarArg, word)
+        do{
+            let result = try self.context.fetch(fetchRequest)
+            for data in result as [NSManagedObject]{
+                self.context.delete(data)
+            }
+            try self.context.save()
+            print("삭제 성공")
+        }catch{
+            print("삭제 실패")
+        }
+    }
 }
