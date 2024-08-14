@@ -9,40 +9,49 @@ import Foundation
 import UIKit
 class CreateWordsController: UIViewController{
     let createWordsView = CreateWordsView()
-    let coreData = WordsBookCoreDataManager()
+    let bookCoreData = WordsBookCoreDataManager()
+    let wordCoreData = WordsCoreDataManager()
+    var wordBookUUID: UUID?
     override func loadView() {
         view = createWordsView
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        setAction()
+        setCreateWordsBookAction()
     }
-    func setAction(){
-        createWordsView.saveButton.addTarget(self, action: #selector(saveCoreData), for: .touchDown)
+    /// 기본적으로 셋팅되는 단어장 저장하는 Action설정
+    func setCreateWordsBookAction(){
+        createWordsView.saveButton.addTarget(self, action: #selector(saveBook), for: .touchDown)
     }
-//    @objc func saveCoreData(){
-//        coreData.saveWordsBooks(wordsBookName: createWordsView.wordsBookNameTextField.text!, wordsExplain: createWordsView.wordsBookNameTextField.text ?? "")
-//    }
-//    
-    @objc func saveCoreData() {
-        let wordsBookName = createWordsView.wordsBookNameTextField.text ?? ""
-        let wordsExplain = createWordsView.explanationTextField.text ?? ""
-        
-        if wordsBookName.isEmpty {
-            print("Error: WordsBook name is empty. Cannot save to Core Data.")
-            return
-        }
-        
-        coreData.saveWordsBooks(wordsBookName: wordsBookName, wordsExplain: wordsExplain)
-        
-        // 저장된 데이터 가져오기
-        let savedWordsBooks = coreData.retrieveWordsBookInfos()
-        
-        // 최근 저장된 단어장 출력
-        if let lastSavedBook = savedWordsBooks.last {
-            print("ID: \(lastSavedBook.wordsBookId ?? UUID()), Name: \(lastSavedBook.wordsBookName ?? ""), Explanation: \(lastSavedBook.wordsExplain ?? "")")
-        } else {
-            print("No WordsBooks saved.")
-        }
+    
+    /// 단어 저장을 위한 Action설정
+    func setCreateWordsAction(){
+        createWordsView.saveButton.removeTarget(nil, action: nil, for: .allEvents)
+        createWordsView.saveButton.addTarget(self, action: #selector(saveWord), for: .touchDown)
+    }
+    
+    
+    /// 단어장을 저장하는 메서드
+    @objc func saveBook(){
+        bookCoreData.saveWordsBooks(wordsBookName: createWordsView.wordsBookNameTextField.text!, wordsExplain: createWordsView.wordsBookNameTextField.text ?? "")
+    }
+    
+    /// 단어를 저장하는 메서드
+    @objc func saveWord(){
+        wordCoreData.saveWords(wordsBookId: wordBookUUID, word: createWordsView.wordsBookNameTextField.text!, meaning: createWordsView.wordsBookNameTextField.text ?? "")
+    }
+    
+    /// 단어 저장하기 위해서 프로퍼티 변경
+    /// - Parameters:
+    ///   - wordBookId: 단어장 ID (UUID)
+    ///   - wordBookName: 단어장 이름
+    func setCreateWord(wordBookId: UUID, wordBookName: String){
+        createWordsView.titleLabel.text = wordBookName
+        createWordsView.wordsBookLabel.text = "단어"
+        createWordsView.wordsBookNameTextField.placeholder = "단어를 입력해주세요"
+        createWordsView.explanationLabel.text = "뜻"
+        createWordsView.explanationTextField.placeholder = "단어의 의미를 입력해주세요."
+        wordBookUUID = wordBookId
+        setCreateWordsAction()
     }
 }

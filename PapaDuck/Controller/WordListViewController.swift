@@ -36,7 +36,9 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @objc func addWord() {
-        // 단어 추가 화면
+        let createWordsController = CreateWordsController()
+        createWordsController.setCreateWord(wordBookId: UUID(), wordBookName: "TEST")
+        navigationController?.pushViewController(createWordsController, animated: true)
     }
     
     @objc func playWord() {
