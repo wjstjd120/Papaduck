@@ -214,14 +214,12 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
         if indexPath.row == data.count {
             delegate?.mainViewDidRequestAddWord(self)
         } else {
-            print("셀 클릭됨")
             let selectedBook = data[indexPath.row]
             delegate?.mainView(self, didSelectBook: selectedBook)
         }
     }
     
     @objc private func didTapAddVocaButton() {
-        print("단어장 추가 클릭됨")
         delegate?.mainViewDidRequestAddWord(self)
     }
     
