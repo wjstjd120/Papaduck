@@ -9,10 +9,12 @@ import Foundation
 import UIKit
 import CoreData
 class WordsBookCoreDataManager{
-    static let shared = WordsBookCoreDataManager()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    ///단어장 저장하는 메서드
+    /// 단어장 저장하는 메서드
+    /// - Parameters:
+    ///   - wordsBookName: 단어장 이름
+    ///   - wordsExplain: 단어장 설명
     func saveWordsBooks(wordsBookName: String, wordsExplain: String) {
         let wordsBook = WordsBookEntity(context: context)
         wordsBook.wordsBookId = UUID()
@@ -26,7 +28,8 @@ class WordsBookCoreDataManager{
         }
     }
     
-    ///단어장 전체 조회하는 메서드
+    /// 단어장 전체 조회하는 메서드
+    /// - Returns: [WordsBookEntity]
     func retrieveWordsBookInfos() -> [WordsBookEntity] {
         let fetchRequest: NSFetchRequest<WordsBookEntity> = WordsBookEntity.fetchRequest()
         
