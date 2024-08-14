@@ -12,7 +12,7 @@ struct WordsBookModel {
     let name: String
     let Explain: String
     let wordCount: String
-
+}
   
 struct Word {
     let word: String
