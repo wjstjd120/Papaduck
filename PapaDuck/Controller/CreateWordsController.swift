@@ -26,7 +26,7 @@ class CreateWordsController: UIViewController{
 //    
     @objc func saveCoreData() {
         let wordsBookName = createWordsView.wordsBookNameTextField.text ?? ""
-        let wordsExplain = createWordsView.wordsBookNameTextField.text ?? ""
+        let wordsExplain = createWordsView.explanationTextField.text ?? ""
         
         if wordsBookName.isEmpty {
             print("Error: WordsBook name is empty. Cannot save to Core Data.")

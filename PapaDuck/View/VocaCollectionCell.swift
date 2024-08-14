@@ -26,6 +26,7 @@ class VocaCollectionCell: UICollectionViewCell {
         return label
     }()
     
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -69,4 +70,6 @@ class VocaCollectionCell: UICollectionViewCell {
         descriptionLabel.text = model.Explain
         wordCountLabel.text = "\(model.wordCount)"
     }
+    
+    
 }
