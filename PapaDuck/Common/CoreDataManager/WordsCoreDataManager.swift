@@ -121,4 +121,21 @@ class WordsCoreDataManager{
             return []
         }
     }
+    
+    /// 단어장에 같은 단어가 있는지 확인하는 함수
+    /// - Parameters:
+    ///   - wordsBookId: 저장 할 단어장 ID
+    ///   - word: 저장할 단어
+    /// - Returns: 있는지 없는지
+    func validateCheck(wordsBookId: UUID, word: String) -> Bool{
+        let fetchRequest = WordsEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "wordsBookId == %@ AND word == %@", wordsBookId as CVarArg, word)
+        do {
+            let result = try context.fetch(fetchRequest)
+            return !result.isEmpty
+        } catch {
+            print("에러: \(error.localizedDescription)")
+            return false
+        }
+    }
 }
