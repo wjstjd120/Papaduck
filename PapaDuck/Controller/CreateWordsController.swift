@@ -11,6 +11,7 @@ class CreateWordsController: UIViewController{
     let createWordsView = CreateWordsView()
     let bookCoreData = WordsBookCoreDataManager()
     let wordCoreData = WordsCoreDataManager()
+    let userCoreData = UserCoreDataManager()
     var wordBookUUID: UUID?
     var bookEntity: WordsBookEntity?
     var wordEntity: WordsEntity?
@@ -52,18 +53,39 @@ class CreateWordsController: UIViewController{
         
         if let bookEntity = bookEntity{
             //단어장 수정
+            if bookCoreData.validateCheck(wordsBookName: createWordsView.wordsBookNameTextField.text!){
+                createWordsView.errorLabel.text = "이미 같은 이름의 단어장이 있습니다."
+                self.createWordsView.wordsBookNameTextField.becomeFirstResponder()
+                return
+            }
             bookCoreData.updateWordsBook(wordsBookId: bookEntity.wordsBookId!, newWordsBookName: createWordsView.wordsBookNameTextField.text!, newWordsExplain: createWordsView.explanationTextField.text ?? "")
         }else if let wordEntity = wordEntity {
             //단어 수정
+            if wordCoreData.validateCheck(wordsBookId: wordBookUUID ?? UUID(), word: createWordsView.wordsBookNameTextField.text!){
+                createWordsView.errorLabel.text = "이미 단어장에 있는 단어 입니다."
+                self.createWordsView.wordsBookNameTextField.becomeFirstResponder()
+                return
+            }
             createWordsView.deleteButton.isHidden = false
             wordCoreData.updateWords(entity: wordEntity, newWords: createWordsView.wordsBookNameTextField.text!, newWordsMeaning: createWordsView.explanationTextField.text ?? "", memorizationYn: wordEntity.memorizationYn)
         }else{
             if let wordBookUUID = wordBookUUID {
                 // 단어 저장
+                if wordCoreData.validateCheck(wordsBookId: wordBookUUID, word: createWordsView.wordsBookNameTextField.text!){
+                    createWordsView.errorLabel.text = "이미 단어장에 있는 단어 입니다."
+                    self.createWordsView.wordsBookNameTextField.becomeFirstResponder()
+                    return
+                }
                 wordCoreData.saveWords(wordsBookId: wordBookUUID, word: createWordsView.wordsBookNameTextField.text!, meaning: createWordsView.explanationTextField.text ?? "")
+                userCoreData.updateExp(plus: 2)
                 print("단어 저장됨")
             } else {
                 // 단어장 저장
+                if bookCoreData.validateCheck(wordsBookName: createWordsView.wordsBookNameTextField.text!){
+                    createWordsView.errorLabel.text = "이미 같은 이름의 단어장이 있습니다."
+                    self.createWordsView.wordsBookNameTextField.becomeFirstResponder()
+                    return
+                }
                 bookCoreData.saveWordsBooks(wordsBookName: createWordsView.wordsBookNameTextField.text!, wordsExplain: createWordsView.explanationTextField.text ?? "")
                 print("단어장 저장됨")
             }
