@@ -57,7 +57,8 @@ class MainView: UIView {
         
         addVocaButton.backgroundColor = UIColor.mainYellow
         addVocaButton.setTitle("단어장 추가", for: .normal)
-        addVocaButton.setTitleColor(.white, for: .normal)
+        addVocaButton.setTitleColor(.subBlack, for: .normal)
+        addVocaButton.titleLabel?.font = FontNames.subFont2.font()
         addVocaButton.layer.cornerRadius = 8
         addVocaButton.addTarget(self, action: #selector(didTapAddVocaButton), for: .touchUpInside)
         
