@@ -138,8 +138,10 @@ class MainView: UIView {
 extension MainView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // 셀의 개수를 반환합니다. 마지막에 추가 버튼을 위한 셀을 포함합니다.
         return data.count + 1
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row == data.count {
@@ -154,7 +156,7 @@ extension MainView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mainViewCollectioncell", for: indexPath) as! VocaCollectionCell
             let model = data[indexPath.row]
             cell.configure(with: model)
-            cell.delegate = delegate
+            cell.delegate = delegate as? VocaCollectionCellDelegate  // Delegate 설정
             return cell
         }
     }
