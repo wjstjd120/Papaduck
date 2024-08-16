@@ -104,9 +104,14 @@ class VocaCollectionCell: UICollectionViewCell {
         vocaNameLabel.text = model.wordsBookName
         descriptionLabel.text = model.wordsExplain
 
+        // 단어장의 단어 개수
+        let totalWordsCount = MainController().wordsBookCount(wordsBookId: model.wordsBookId ?? UUID())
+           
+        
+        // 단어 개수 표시
+        wordCountLabel.text = "\(totalWordsCount)개"
         let progress = 0.75
         let progressPercentage = Int(progress * 100)
-        wordCountLabel.text = "\(progressPercentage)%"
         progressBarView.setProgress(diameter: 60, progress: progress)
     }
     
