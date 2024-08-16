@@ -15,8 +15,8 @@ class WordListView: UIView {
         let button = UIButton(type: .system)
         button.setTitle("▶︎", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .gray
-        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .subBlue2
+        button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 25
         return button
     }()
