@@ -34,6 +34,7 @@ class CreateWordsController: UIViewController{
         }else if let wordEntity = wordEntity{
             wordCoreData.deleteWord(wordsBookId: wordEntity.wordsBookId!, word: wordEntity.word!)
         }
+        navigationController?.popViewController(animated: true)
     }
     
     /// 단어장 밑 저장
@@ -51,7 +52,6 @@ class CreateWordsController: UIViewController{
         
         if let bookEntity = bookEntity{
             //단어장 수정
-            createWordsView.deleteButton.isHidden = false
             bookCoreData.updateWordsBook(wordsBookId: bookEntity.wordsBookId!, newWordsBookName: createWordsView.wordsBookNameTextField.text!, newWordsExplain: createWordsView.explanationTextField.text ?? "")
         }else if let wordEntity = wordEntity {
             //단어 수정
@@ -84,6 +84,20 @@ class CreateWordsController: UIViewController{
         createWordsView.explanationLabel.text = "뜻"
         createWordsView.explanationTextField.placeholder = "단어의 의미를 입력해주세요."
         wordBookUUID = wordBookId
+        if let wordEntity = wordEntity{
+            createWordsView.deleteButton.isHidden = false
+            createWordsView.wordsBookNameTextField.text = wordEntity.word
+            createWordsView.explanationTextField.text = wordEntity.meaning
+        }
     }
-
+    
+    
+    /// 단어장 수정화면으로 전환하기위한 메서드
+    /// - Parameter etity: 선택된 단어장 entity
+    func setUpdateBook(entity: WordsBookEntity){
+        bookEntity = entity
+        createWordsView.deleteButton.isHidden = false
+        createWordsView.wordsBookNameTextField.text = entity.wordsBookName
+        createWordsView.explanationTextField.text = entity.wordsExplain
+    }
 }
