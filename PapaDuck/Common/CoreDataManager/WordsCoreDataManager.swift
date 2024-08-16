@@ -80,4 +80,30 @@ class WordsCoreDataManager{
             print("삭제 실패")
         }
     }
+    
+    /// 단어 수정 메서드
+    /// - Parameters:
+    ///   - entity: 기존에 있던 단어 entity
+    ///   - newWords: 변경되는 단어
+    ///   - newWordsMeaning: 변경되는 단어 의미
+    ///   - memorizationYn: 변경되는 단어 암기 여부
+    func updateWords(entity: WordsEntity, newWords: String, newWordsMeaning: String, memorizationYn: Bool) {
+        let fetchRequest: NSFetchRequest<WordsEntity> = WordsEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "wordsBookId == %@ AND word == %@", entity.wordsBookId! as CVarArg, entity.word!)
+        
+        do {
+            let result = try context.fetch(fetchRequest)
+            if let wordsBook = result.first {
+                wordsBook.word = newWords
+                wordsBook.meaning = newWordsMeaning
+                wordsBook.memorizationYn = memorizationYn
+                try context.save()
+                print("수정 성공")
+            } else {
+                print("단어장 찾을 수 없음")
+            }
+        } catch {
+            print("수정 실패: \(error.localizedDescription)")
+        }
+    }
 }

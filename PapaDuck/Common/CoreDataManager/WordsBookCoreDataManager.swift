@@ -60,4 +60,24 @@ class WordsBookCoreDataManager{
             print("삭제 실패")
         }
     }
+    
+    func updateWordsBook(wordsBookId: UUID, newWordsBookName: String, newWordsExplain: String) {
+        let fetchRequest: NSFetchRequest<WordsBookEntity> = WordsBookEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "wordsBookId == %@", wordsBookId as CVarArg)
+        
+        do {
+            let result = try context.fetch(fetchRequest)
+            if let wordsBook = result.first {
+                wordsBook.wordsBookName = newWordsBookName
+                wordsBook.wordsExplain = newWordsExplain
+                
+                try context.save()
+                print("수정 성공")
+            } else {
+                print("단어장 찾을 수 없음")
+            }
+        } catch {
+            print("수정 실패: \(error.localizedDescription)")
+        }
+    }
 }
