@@ -21,14 +21,14 @@ class CircularProgressBar: UIView {
                     endAngle: 2 * .pi,
                     clockwise: true)
         path.lineWidth = lineWidth
-        UIColor.lightGray.set()
+        UIColor.subBlue2.set()
         path.stroke()
     }
     
     func setProgress(diameter: CGFloat, progress: Double) {
         backgroundColor = .clear
         
-        let rect = CGRect(x: 0, y: 0, width: diameter, height: diameter)
+        _ = CGRect(x: 0, y: 0, width: diameter, height: diameter)
         let radius = (diameter - lineWidth) / 2
         let startAngle = CGFloat.pi / 2
         let endAngle = (.pi * 2) * CGFloat(progress) - startAngle

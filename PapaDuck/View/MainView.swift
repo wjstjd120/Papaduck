@@ -5,11 +5,6 @@
 //  Created by 이주희 on 8/12/24.
 //
 
-// 로고, 타이틀 뷰
-// 단어장 있을때,
-// 단어장 없을때, 파덕이미지뷰, 말풍선 이미지뷰
-// 말풍선 이미지 뷰 액션 > 단어장 추가 뷰컨으로 이동
-
 import UIKit
 import SnapKit
 
@@ -18,79 +13,22 @@ protocol MainViewDelegate: AnyObject {
     func mainViewDidRequestAddWord(_ mainView: MainView)
 }
 
-class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
-    
+class MainView: UIView {
     weak var delegate: MainViewDelegate?
+    var data = [WordsBookEntity]()
     
-    private var data = [WordsBookEntity]()
+    // MARK: - UI Components
+    private let titleLabel = UILabel()
+    private let logoImageView = UIImageView(image: UIImage(named: "Logo"))
+    private let bubbleImageView = UIImageView(image: UIImage(named: "bubble"))
+    let addLabel = UILabel()
+    private let paduckImageView = UIImageView(image: UIImage(named: "papaduck"))
+    private let dataEmptyView = UIView()
+    let vocabularyCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    lazy var addVocaButton = UIButton()
+    private let dataStateView = UIView()
     
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "PAPADUCK"
-        label.font = FontNames.mainFont.font()
-        label.textColor = UIColor.subBlue
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private let logoImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "Logo"))
-        imageView.contentMode = .scaleAspectFill
-        return imageView
-    }()
-    
-    
-    private let bubbleImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "bubble"))
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    let addLabel: UILabel = {
-        let label = UILabel()
-        label.text = "단어장을 만들으세요..."
-        label.font = FontNames.main2Font2.font()
-        label.textColor = UIColor.black
-        label.isUserInteractionEnabled = true
-        return label
-    }()
-    
-    private let paduckImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "papaduck"))
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    private let dataEmptyView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
-    }()
-    
-    
-    private let vocabularyCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        return collectionView
-    }()
-    
-    private let addVocaButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = UIColor.mainYellow
-        button.setTitle("단어장 추가", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 8
-        button.addTarget(self, action: #selector(didTapAddVocaButton), for: .touchUpInside)
-        return button
-    }()
-    
-    private let dataStateView: UIView = {
-        let view = UIView()
-        return view
-    }()
-    
-    
+    // MARK: - 초기화
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -102,9 +40,28 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
         super.init(coder: coder)
     }
     
-    
+    // MARK: - Setup
     private func setupView() {
-        [titleLabel, logoImageView, dataEmptyView, vocabularyCollectionView,dataStateView].forEach { addSubview($0)}
+        paduckImageView.contentMode = .scaleAspectFit
+        bubbleImageView.contentMode = .scaleAspectFit
+        
+        titleLabel.text = "PAPADUCK"
+        titleLabel.font = FontNames.mainFont.font()
+        titleLabel.textColor = UIColor.subBlue
+        titleLabel.textAlignment = .center
+        
+        addLabel.text = "단어장을 만들으세요..."
+        addLabel.font = FontNames.main2Font2.font()
+        addLabel.textColor = UIColor.black
+        addLabel.isUserInteractionEnabled = true
+        
+        addVocaButton.backgroundColor = UIColor.mainYellow
+        addVocaButton.setTitle("단어장 추가", for: .normal)
+        addVocaButton.setTitleColor(.white, for: .normal)
+        addVocaButton.layer.cornerRadius = 8
+        addVocaButton.addTarget(self, action: #selector(didTapAddVocaButton), for: .touchUpInside)
+        
+        [titleLabel, logoImageView, dataEmptyView, dataStateView].forEach { addSubview($0)}
         [bubbleImageView, paduckImageView, addLabel].forEach { dataEmptyView.addSubview($0)}
         [vocabularyCollectionView, addVocaButton].forEach { dataStateView.addSubview($0)}
     }
@@ -126,13 +83,10 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
             $0.bottom.equalToSuperview().offset(-60)
-            
         }
         
         vocabularyCollectionView.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(dataStateView)
-            $0.bottom.equalTo(dataStateView.snp.bottom).offset(-20)
-            
+            $0.edges.equalToSuperview()
         }
         
         dataEmptyView.snp.makeConstraints {
@@ -141,7 +95,7 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
         
         bubbleImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(dataEmptyView.snp.top).offset(300)
+            $0.top.equalToSuperview().offset(300)
             $0.width.equalTo(200)
             $0.height.equalTo(100)
         }
@@ -152,7 +106,7 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
         
         paduckImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(bubbleImageView.snp.bottom).offset(20)
+            $0.top.equalTo(bubbleImageView.snp.bottom)
             $0.width.equalTo(300)
             $0.height.equalTo(200)
         }
@@ -162,52 +116,57 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
         vocabularyCollectionView.dataSource = self
         vocabularyCollectionView.delegate = self
         vocabularyCollectionView.register(VocaCollectionCell.self, forCellWithReuseIdentifier: "mainViewCollectioncell")
-        vocabularyCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "addVocaCell") // Register addVocaCell
+        vocabularyCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "addVocaCell")
     }
     
+    // MARK: - Public Methods
     func updateView(forDataAvailability hasData: Bool) {
-        if hasData {
-            dataEmptyView.isHidden = true
-            dataStateView.isHidden = false
-        } else {
-            dataEmptyView.isHidden = false
-            dataStateView.isHidden = true
-        }
+        dataEmptyView.isHidden = hasData
+        dataStateView.isHidden = !hasData
     }
     
-    // MARK: - UICollectionViewDataSource
+    func setData(_ data: [WordsBookEntity]) {
+        self.data = data
+        updateView(forDataAvailability: !data.isEmpty)
+        vocabularyCollectionView.reloadData()
+    }
+    
+    // MARK: - Actions
+    @objc private func didTapAddVocaButton() {
+        delegate?.mainViewDidRequestAddWord(self)
+    }
+}
+
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
+extension MainView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // 셀의 개수를 반환합니다. 마지막에 추가 버튼을 위한 셀을 포함합니다.
         return data.count + 1
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row == data.count {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "addVocaCell", for: indexPath)
             cell.contentView.addSubview(addVocaButton)
-            
             addVocaButton.snp.makeConstraints {
-                $0.bottom.equalToSuperview()
+                $0.edges.equalToSuperview()
                 $0.height.equalTo(50)
-                $0.leading.equalToSuperview()
-                $0.trailing.equalToSuperview()
             }
-            
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mainViewCollectioncell", for: indexPath) as! VocaCollectionCell
             let model = data[indexPath.row]
             cell.configure(with: model)
+            cell.delegate = delegate as? VocaCollectionCellDelegate  // Delegate 설정
             return cell
         }
     }
     
-    // MARK: - UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.row == data.count {
-            return CGSize(width: collectionView.bounds.width - 32, height: 50)
-        } else {
-            return CGSize(width: collectionView.bounds.width - 32, height: 100)
-        }
+        let height: CGFloat = indexPath.row == data.count ? 50 : 100
+        return CGSize(width: collectionView.bounds.width - 32, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -217,15 +176,5 @@ class MainView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlow
             let selectedBook = data[indexPath.row]
             delegate?.mainView(self, didSelectBook: selectedBook)
         }
-    }
-    
-    @objc private func didTapAddVocaButton() {
-        delegate?.mainViewDidRequestAddWord(self)
-    }
-    
-    func setData(_ data: [WordsBookEntity]) {
-        self.data = data
-        updateView(forDataAvailability: !data.isEmpty)
-        vocabularyCollectionView.reloadData()
     }
 }

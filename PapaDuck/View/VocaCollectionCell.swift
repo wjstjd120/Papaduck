@@ -8,7 +8,14 @@
 import UIKit
 import SnapKit
 
+protocol VocaCollectionCellDelegate: AnyObject {
+    func vocaCollectionCellDidTapEdit(_ cell: VocaCollectionCell)
+}
+
 class VocaCollectionCell: UICollectionViewCell {
+    
+    weak var delegate: VocaCollectionCellDelegate?
+    
     private let vocaNameLabel: UILabel = {
         let label = UILabel()
         label.font = FontNames.subFont.font()
@@ -28,11 +35,12 @@ class VocaCollectionCell: UICollectionViewCell {
         return label
     }()
     
-    private let editButton: UIButton = {
+    private lazy var editButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "gearshape.fill"), for: .normal)
         button.tintColor = .subBlue
         button.imageView?.contentMode = .scaleAspectFit
+        button.addTarget(self, action: #selector(didTapEditButton), for: .touchUpInside)
         return button
     }()
     
@@ -96,9 +104,19 @@ class VocaCollectionCell: UICollectionViewCell {
         vocaNameLabel.text = model.wordsBookName
         descriptionLabel.text = model.wordsExplain
 
+        // 단어장의 단어 개수
+        let totalWordsCount = MainController().wordsBookCount(wordsBookId: model.wordsBookId ?? UUID())
+           
+        
+        // 단어 개수 표시
+        wordCountLabel.text = "\(totalWordsCount)개"
         let progress = 0.75
         let progressPercentage = Int(progress * 100)
-        wordCountLabel.text = "\(progressPercentage)%"
         progressBarView.setProgress(diameter: 60, progress: progress)
+    }
+    
+    @objc private func didTapEditButton() {
+        delegate?.vocaCollectionCellDidTapEdit(self)
+        print("편집버튼 클릭")
     }
 }

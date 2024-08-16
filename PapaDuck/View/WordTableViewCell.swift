@@ -21,13 +21,13 @@ class WordTableViewCell: UITableViewCell {
     
     let wordLabel: UILabel = {
         let label = UILabel()
-        label.font = FontNames.main2Font2.font()
+        label.font = FontNames.subFont3.font()
         return label
     }()
     
     let meaningLabel: UILabel = {
         let label = UILabel()
-        label.font = FontNames.main2Font2.font()
+        label.font = FontNames.thinFont2.font()
         return label
     }()
     
@@ -59,17 +59,16 @@ class WordTableViewCell: UITableViewCell {
         wordLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(30)
             $0.top.equalTo(containerView.snp.top)
-            $0.width.height.equalTo(60)
+            $0.height.equalTo(60)
         }
         
         meaningLabel.snp.makeConstraints {
             $0.top.equalTo(wordLabel.snp.bottom).inset(10)
             $0.leading.equalTo(wordLabel.snp.leading)
-            $0.width.equalTo(100)
         }
         
         memorizeLabel.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(20)
+            $0.trailing.equalToSuperview().inset(30)
             $0.centerY.equalTo(meaningLabel.snp.centerY)
         }
     }
