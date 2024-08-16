@@ -99,6 +99,23 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
         
         return cell
     }
+    
+    // 셀 선택 수정화면 이동
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedWord = words[indexPath.row]
+        let createWordsController = CreateWordsController()
+        
+        // 단어 수정 모드로 설정
+        createWordsController.wordEntity = selectedWord
+        
+        
+         if let book = selectedBook {
+             createWordsController.setCreateWord(wordBookId: book.wordsBookId!, wordBookName: book.wordsBookName ?? "기본 이름")
+         }
+        
+        
+        navigationController?.pushViewController(createWordsController, animated: true)
+    }
 }
 
 //#Preview("WordListViewController") {
