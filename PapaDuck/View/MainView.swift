@@ -42,6 +42,9 @@ class MainView: UIView {
     
     // MARK: - Setup
     private func setupView() {
+        paduckImageView.contentMode = .scaleAspectFit
+        bubbleImageView.contentMode = .scaleAspectFit
+        
         titleLabel.text = "PAPADUCK"
         titleLabel.font = FontNames.mainFont.font()
         titleLabel.textColor = UIColor.subBlue
@@ -103,7 +106,7 @@ class MainView: UIView {
         
         paduckImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(bubbleImageView.snp.bottom).offset(20)
+            $0.top.equalTo(bubbleImageView.snp.bottom)
             $0.width.equalTo(300)
             $0.height.equalTo(200)
         }

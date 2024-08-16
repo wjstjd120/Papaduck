@@ -11,7 +11,8 @@ import SnapKit
 class MainController: UIViewController {
     
     private let mainView = MainView()
-    private let coreData = WordsBookCoreDataManager()
+    private let wordsBookCoreDataManager = WordsBookCoreDataManager()
+    private let wordsCoreDataManager = WordsCoreDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,17 +38,28 @@ class MainController: UIViewController {
     // MARK: - Data Loading
     
     private func loadWordsBooks() {
-        let wordsBookEntities = coreData.retrieveWordsBookInfos()
+        let wordsBookEntities = wordsBookCoreDataManager.retrieveWordsBookInfos()
         mainView.setData(wordsBookEntities)
     }
     
     // 프린트문 - 삭제가능
     private func printWordsBookInfos() {
-        let wordsBookEntities = coreData.retrieveWordsBookInfos()
+        let wordsBookEntities = wordsBookCoreDataManager.retrieveWordsBookInfos()
         for entity in wordsBookEntities {
             print("ID: \(entity.objectID), Name: \(entity.wordsBookName ?? "Unknown"), Explanation: \(entity.wordsExplain ?? "Unknown")")
         }
     }
+    
+    //단어장의 단어 갯수 조회
+    /// 단어장 UUID로 단어장에 포함되어있는 단어를 조회하는 메서드  - Returns: [단어]
+    /// [단어] > 카운트
+    /// - Parameter wordsBookId: 단어장 ID
+    /// - Returns: 단어 개수
+    func wordsBookCount(wordsBookId: UUID) -> Int {
+        let words = wordsCoreDataManager.retrieveWordsBookInfos(wordsBookId: wordsBookId)
+        return words.count
+    }
+    
     
     // MARK: - Actions
     
