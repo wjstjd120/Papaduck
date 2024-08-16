@@ -27,7 +27,7 @@ extension UIColor {
     }
 
     static let colors: [String: String] = [
-        "mainYellow": "#EEDF58",
+        "mainYellow": "#FFEE53",
         "subYellow": "#FFFBE6",
         "subBlue" : "#72CBE8",
         "subBlue2" : "#BFCFD4"

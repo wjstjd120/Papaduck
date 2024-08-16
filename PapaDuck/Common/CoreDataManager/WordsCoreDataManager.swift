@@ -106,4 +106,19 @@ class WordsCoreDataManager{
             print("수정 실패: \(error.localizedDescription)")
         }
     }
+    
+    
+    /// 단어 전체 조회
+    /// - Returns: [단어]
+    func retrieveAllWords() -> [WordsEntity] {
+        let fetchRequest: NSFetchRequest<WordsEntity> = WordsEntity.fetchRequest()
+        
+        do {
+            let words = try context.fetch(fetchRequest)
+            return words
+        } catch {
+            print("에러: \(error.localizedDescription)")
+            return []
+        }
+    }
 }
