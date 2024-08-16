@@ -121,5 +121,6 @@ class CreateWordsController: UIViewController{
         createWordsView.deleteButton.isHidden = false
         createWordsView.wordsBookNameTextField.text = entity.wordsBookName
         createWordsView.explanationTextField.text = entity.wordsExplain
+        createWordsView.titleLabel.text = entity.wordsBookName
     }
 }
