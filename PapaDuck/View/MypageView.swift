@@ -78,7 +78,7 @@ class MypageView: UIView {
     }()
     
     //등록된 단어 갯수
-    private var registrationnumber: UILabel = {
+    public var registrationnumber: UILabel = {
         let label = UILabel()
         label.text = "0"
         label.font = .boldSystemFont(ofSize: 30)
@@ -87,7 +87,7 @@ class MypageView: UIView {
     }()
     
     //암기단어 갯수
-    private var memorizingnumber: UILabel = {
+    public var memorizingnumber: UILabel = {
         let label = UILabel()
         label.text = "0"
         label.font = .boldSystemFont(ofSize: 30)

@@ -7,11 +7,15 @@
 
 import UIKit
 import SnapKit
+import CoreData
 
 class MypageViewController: UIViewController {
     
+    let wordsBookCoreDataManager = WordsBookCoreDataManager()//a
+    let wordsCoreDataManager = WordsCoreDataManager()//b
     let mypageView = MypageView()
     var selectedDate: DateComponents? = nil
+    var words: [WordsEntity] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +24,13 @@ class MypageViewController: UIViewController {
         lvimageChange()
         reloadDateView(date: Date())
         calendar()
+        registrationNumbers()
     }
     
+    private func registrationNumbers() {
+        
+        //mypageView.registrationnumber.text = "\()"
+    }
     //레벨별 고라파덕 머리심어주는 함수
     private func lvimageChange() {
         if mypageView.lvLabel.text == "Lv.2" {
@@ -84,8 +93,6 @@ class MypageViewController: UIViewController {
         mypageView.calendarView.reloadDecorations(forDateComponents: [calendar.dateComponents([.day, .month, .year], from: date!)], animated: true)
     }
 }
-
-
 
 extension MypageViewController: UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
     // 달력의 특정 날짜에 대해 장식을 반환하는 역할
