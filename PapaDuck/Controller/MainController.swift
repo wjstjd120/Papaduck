@@ -81,14 +81,9 @@ extension MainController: VocaCollectionCellDelegate {
             
             // 선택한 단어장 정보 출력
             print("선택된 단어장 - ID: \(selectedBook.wordsBookId ?? UUID()), 이름: \(selectedBook.wordsBookName ?? "알 수 없음"), 설명: \(selectedBook.wordsExplain ?? "알 수 없음")")
-            
             let createWordsController = CreateWordsController()
             createWordsController.bookEntity = selectedBook
-
-//            if let bookUUID = selectedBook.wordsBookId {
-//                createWordsController.setCreateWord(wordBookId: bookUUID, wordBookName: selectedBook.wordsBookName ?? "기본 이름")
-//            }
-
+            createWordsController.setUpdateBook(entity: selectedBook)
             navigationController?.pushViewController(createWordsController, animated: true)
         } else {
             print("셀의 인덱스 경로를 찾을 수 없음")
