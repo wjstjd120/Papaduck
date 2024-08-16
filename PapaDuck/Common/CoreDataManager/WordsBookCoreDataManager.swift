@@ -60,6 +60,4 @@ class WordsBookCoreDataManager{
             print("삭제 실패")
         }
     }
-    
-    
 }

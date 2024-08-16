@@ -8,42 +8,24 @@
 import UIKit
 import SnapKit
 
+protocol VocaCollectionCellDelegate: AnyObject {
+    func vocaCollectionCellDidTapEdit(_ cell: VocaCollectionCell)
+}
+
 class VocaCollectionCell: UICollectionViewCell {
-    private let vocaNameLabel: UILabel = {
-        let label = UILabel()
-        label.font = FontNames.subFont.font()
-        return label
-    }()
     
-    private let descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.font = FontNames.thinFont2.font()
-        return label
-    }()
+    weak var delegate: VocaCollectionCellDelegate?
     
-    private let wordCountLabel: UILabel = {
-        let label = UILabel()
-        label.font = FontNames.subFont4.font()
-        label.textColor = UIColor.subBlue
-        return label
-    }()
-    
-    private let editButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "gearshape.fill"), for: .normal)
-        button.tintColor = .subBlue
-        button.imageView?.contentMode = .scaleAspectFit
-        return button
-    }()
-    
-    private let progressBarView: CircularProgressBar = {
-        let progressBar = CircularProgressBar()
-        return progressBar
-    }()
+    private let vocaNameLabel = UILabel()
+    private let descriptionLabel = UILabel()
+    private let wordCountLabel = UILabel()
+    private lazy var editButton = UIButton()
+    private let progressBarView = CircularProgressBar()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        setupConstraints()
         setupCellAppearance()
     }
     
@@ -52,10 +34,20 @@ class VocaCollectionCell: UICollectionViewCell {
     }
     
     private func setupView() {
-        [vocaNameLabel, descriptionLabel, editButton, progressBarView].forEach { contentView.addSubview($0) }
+        vocaNameLabel.font = FontNames.subFont.font()
+        descriptionLabel.font = FontNames.thinFont2.font()
+        wordCountLabel.font = FontNames.subFont4.font()
+        wordCountLabel.textColor = UIColor.subBlue
         
-        contentView.addSubview(wordCountLabel)
-
+        editButton.setImage(UIImage(systemName: "gearshape.fill"), for: .normal)
+        editButton.tintColor = .subBlue
+        editButton.imageView?.contentMode = .scaleAspectFit
+        editButton.addTarget(self, action: #selector(didTapEditButton), for: .touchUpInside)
+        
+        [vocaNameLabel, descriptionLabel, editButton, progressBarView, wordCountLabel].forEach { contentView.addSubview($0) }
+    }
+    
+    private func setupConstraints() {
         vocaNameLabel.snp.makeConstraints {
             $0.top.equalTo(contentView).inset(16)
             $0.leading.equalTo(contentView).inset(16)
@@ -95,10 +87,14 @@ class VocaCollectionCell: UICollectionViewCell {
     func configure(with model: WordsBookEntity) {
         vocaNameLabel.text = model.wordsBookName
         descriptionLabel.text = model.wordsExplain
-
+        
         let progress = 0.75
         let progressPercentage = Int(progress * 100)
         wordCountLabel.text = "\(progressPercentage)%"
         progressBarView.setProgress(diameter: 60, progress: progress)
+    }
+    
+    @objc private func didTapEditButton() {
+        delegate?.vocaCollectionCellDidTapEdit(self)
     }
 }
