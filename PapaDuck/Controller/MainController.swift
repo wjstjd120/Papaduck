@@ -67,7 +67,6 @@ class MainController: UIViewController {
     /// 총 갯수 : [단어] > 카운트
     /// 외운단어 갯수 : filter [단어] > 카운트
     func learnedWordsPercentage(wordsBookId: UUID) -> Int {
-        do {
             // 단어장에 포함된 모든 단어 조회
             let words = wordsCoreDataManager.retrieveWordsBookInfos(wordsBookId: wordsBookId)
             let totalWords = words.count
@@ -83,11 +82,7 @@ class MainController: UIViewController {
             let learnedPercentage = (Double(learnedWordsCount) / Double(totalWords)) * 100
             
             return Int(learnedPercentage)
-        } catch {
-            print("단어를 불러오는 데 실패했습니다: \(error)")
-            return 0
         }
-    }
     
     // MARK: - Actions
     
