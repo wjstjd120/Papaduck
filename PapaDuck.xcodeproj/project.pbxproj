@@ -19,6 +19,7 @@
 		4F5920752C6AF12D008101B3 /* CreateWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5920742C6AF12D008101B3 /* CreateWordsView.swift */; };
 		4F5920782C6B27A0008101B3 /* WordsCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5920772C6B27A0008101B3 /* WordsCoreDataManager.swift */; };
 		4F59207A2C6B27AD008101B3 /* UserCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5920792C6B27AD008101B3 /* UserCoreDataManager.swift */; };
+		4F59207B2C6C89BC008101B3 /* WordsBookCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE03C2C69F4F1000B74DB /* WordsBookCoreDataManager.swift */; };
 		56CBA8BA2C6AEE8C0076E283 /* WordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CBA8B92C6AEE8C0076E283 /* WordListViewController.swift */; };
 		56CBA8BC2C6AFB150076E283 /* WordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CBA8BB2C6AFB150076E283 /* WordTableViewCell.swift */; };
 		56CBA8BE2C6B0BDF0076E283 /* WordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CBA8BD2C6B0BDF0076E283 /* WordListView.swift */; };
@@ -29,7 +30,6 @@
 		748EE02C2C69F218000B74DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 748EE02B2C69F218000B74DB /* Assets.xcassets */; };
 		748EE02F2C69F218000B74DB /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 748EE02E2C69F218000B74DB /* Base */; };
 		748EE0382C69F2D4000B74DB /* TabBarContorller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE0372C69F2D4000B74DB /* TabBarContorller.swift */; };
-		748EE03D2C69F4F1000B74DB /* WordsBookCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE03C2C69F4F1000B74DB /* WordsBookCoreDataManager.swift */; };
 		748EE03F2C69F504000B74DB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE03E2C69F504000B74DB /* Model.swift */; };
 		748EE0412C69F50C000B74DB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE0402C69F50C000B74DB /* MainView.swift */; };
 		748EE0462C69F657000B74DB /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EE0452C69F657000B74DB /* Fonts.swift */; };
@@ -41,7 +41,8 @@
 		D6717F292C6AFDD400B28844 /* LINESeedSansKR-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 748EE0472C69F704000B74DB /* LINESeedSansKR-Regular.ttf */; };
 		D6717F2A2C6AFDD600B28844 /* LINESeedSansKR-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 748EE0482C69F704000B74DB /* LINESeedSansKR-Bold.ttf */; };
 		D6717F2C2C6B006500B28844 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6717F2B2C6B006500B28844 /* UIColor+Hex.swift */; };
-		D6717F2E2C6B112600B28844 /* mainViewCollectioncell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6717F2D2C6B112600B28844 /* mainViewCollectioncell.swift */; };
+		D6717F2E2C6B112600B28844 /* VocaCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6717F2D2C6B112600B28844 /* VocaCollectionCell.swift */; };
+		D6717F302C6CC34900B28844 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6717F2F2C6CC34900B28844 /* CircularProgressBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,7 +81,8 @@
 		748EE04D2C6B0647000B74DB /* MemorizeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeController.swift; sourceTree = "<group>"; };
 		748EE04F2C6B0673000B74DB /* MemorizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeView.swift; sourceTree = "<group>"; };
 		D6717F2B2C6B006500B28844 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
-		D6717F2D2C6B112600B28844 /* mainViewCollectioncell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainViewCollectioncell.swift; sourceTree = "<group>"; };
+		D6717F2D2C6B112600B28844 /* VocaCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocaCollectionCell.swift; sourceTree = "<group>"; };
+		D6717F2F2C6CC34900B28844 /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,7 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				748EE0402C69F50C000B74DB /* MainView.swift */,
-				D6717F2D2C6B112600B28844 /* mainViewCollectioncell.swift */,
+				D6717F2D2C6B112600B28844 /* VocaCollectionCell.swift */,
+				D6717F2F2C6CC34900B28844 /* CircularProgressBar.swift */,
 				4F5920742C6AF12D008101B3 /* CreateWordsView.swift */,
 				56CBA8BB2C6AFB150076E283 /* WordTableViewCell.swift */,
 				56CBA8BD2C6B0BDF0076E283 /* WordListView.swift */,
@@ -297,15 +300,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F59207B2C6C89BC008101B3 /* WordsBookCoreDataManager.swift in Sources */,
 				56CBA8BC2C6AFB150076E283 /* WordTableViewCell.swift in Sources */,
 				748EE03F2C69F504000B74DB /* Model.swift in Sources */,
 				748EE04E2C6B0647000B74DB /* MemorizeController.swift in Sources */,
 				748EE0412C69F50C000B74DB /* MainView.swift in Sources */,
-				748EE03D2C69F4F1000B74DB /* WordsBookCoreDataManager.swift in Sources */,
 				56CBA8BA2C6AEE8C0076E283 /* WordListViewController.swift in Sources */,
 				56CBA8BE2C6B0BDF0076E283 /* WordListView.swift in Sources */,
 				4F59207A2C6B27AD008101B3 /* UserCoreDataManager.swift in Sources */,
-				748EE03D2C69F4F1000B74DB /* WordsBookCoreDataManager.swift in Sources */,
 				748EE0242C69F214000B74DB /* MainController.swift in Sources */,
 				748EE0202C69F214000B74DB /* AppDelegate.swift in Sources */,
 				748EE0382C69F2D4000B74DB /* TabBarContorller.swift in Sources */,
@@ -317,13 +319,14 @@
 				4F59206D2C6AED4B008101B3 /* UserEntity+CoreDataClass.swift in Sources */,
 				4F59206E2C6AED4B008101B3 /* UserEntity+CoreDataProperties.swift in Sources */,
 				748EE02A2C69F214000B74DB /* PapaDuck.xcdatamodeld in Sources */,
-				D6717F2E2C6B112600B28844 /* mainViewCollectioncell.swift in Sources */,
+				D6717F2E2C6B112600B28844 /* VocaCollectionCell.swift in Sources */,
 				4F5920722C6AF0CA008101B3 /* CreateWordsController.swift in Sources */,
 				748EE0502C6B0673000B74DB /* MemorizeView.swift in Sources */,
 				748EE0462C69F657000B74DB /* Fonts.swift in Sources */,
 				4F5920752C6AF12D008101B3 /* CreateWordsView.swift in Sources */,
 				748EE0222C69F214000B74DB /* SceneDelegate.swift in Sources */,
 				D6717F2C2C6B006500B28844 /* UIColor+Hex.swift in Sources */,
+				D6717F302C6CC34900B28844 /* CircularProgressBar.swift in Sources */,
 				144D806F2C6AE8DD00C1A1D4 /* MypageView.swift in Sources */,
 				144D80712C6AE90100C1A1D4 /* MypageViewController.swift in Sources */,
 			);

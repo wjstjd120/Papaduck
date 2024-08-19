@@ -13,21 +13,26 @@ class WordTableViewCell: UITableViewCell {
     let containerView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
-        view.layer.masksToBounds = true
+        view.layer.masksToBounds = false
         view.backgroundColor = UIColor(red: 255/255, green: 254/255, blue: 242/255, alpha: 1.0)
+        
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOffset = CGSize(width: 0, height: 2)
+        view.layer.shadowRadius = 4
         
         return view
     }()
     
     let wordLabel: UILabel = {
         let label = UILabel()
-        label.font = FontNames.main2Font2.font()
+        label.font = FontNames.subFont3.font()
         return label
     }()
     
     let meaningLabel: UILabel = {
         let label = UILabel()
-        label.font = FontNames.main2Font2.font()
+        label.font = FontNames.thinFont2.font()
         return label
     }()
     
@@ -58,18 +63,17 @@ class WordTableViewCell: UITableViewCell {
         
         wordLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(30)
-            $0.top.equalTo(containerView.snp.top)
-            $0.width.height.equalTo(60)
+            $0.top.equalTo(containerView.snp.top).offset(-5)
+            $0.height.equalTo(60)
         }
         
         meaningLabel.snp.makeConstraints {
-            $0.top.equalTo(wordLabel.snp.bottom).inset(10)
+            $0.top.equalTo(wordLabel.snp.bottom).offset(-10)
             $0.leading.equalTo(wordLabel.snp.leading)
-            $0.width.equalTo(100)
         }
         
         memorizeLabel.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(20)
+            $0.trailing.equalToSuperview().inset(30)
             $0.centerY.equalTo(meaningLabel.snp.centerY)
         }
     }
