@@ -23,8 +23,6 @@ class MypageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = mypageView
-        updateProgress()
-        lvimageChange()
         calendar()
     }
     
@@ -32,7 +30,8 @@ class MypageViewController: UIViewController {
         super.viewWillAppear(animated)
         registrationNumbers()
         memorizingNumbers()
-        setExperience(max: 100)
+        lvimageChange()
+        loadUserExperience()
     }
     
     // 총 등록단어 갯수 확인
@@ -65,45 +64,47 @@ class MypageViewController: UIViewController {
         }
     }
     
-    // 경험치 레이블 /를 나눠주는 함수
-    private func updateProgress() {
-        let experienceText = mypageView.exLabel.text?.split(separator: "/")
-        guard let currentExp = experienceText?.first, let maxExp = experienceText?.last,
-              let currentExpValue = Float(currentExp), let maxExpValue = Float(maxExp) else {
-            return
-        }
+    private func loadUserExperience() {
+        let userExp = userCoreDataManager.retrieveExp().first?.exp ?? "0"
+        let currentExp = Int(userExp) ?? 0
+        let maxExp = calculateMaxExp()
         
-        mypageView.exProgressView.progress = currentExpValue / maxExpValue
+        mypageView.exLabel.text = "\(currentExp)/\(maxExp)"
+        mypageView.exProgressView.progress = Float(currentExp) / Float(maxExp)
         
-        // 경험치가 최대값에 도달했을 때 레벨업 처리
-        if currentExpValue >= maxExpValue {
-            if let currentLevel = Int(mypageView.lvLabel.text?.replacingOccurrences(of: "Lv.", with: "") ?? "1") {
-                mypageView.lvLabel.text = "Lv.\(currentLevel + 1)"
-            }
-            mypageView.exLabel.text = "0/\(Int(maxExpValue + 100))"
-            mypageView.exProgressView.progress = 0
-            lvimageChange()
+        if currentExp >= maxExp {
+            levelUp()
         }
     }
-    
-    // 경험치를 조회하고 조회가 완료되면 캘린더에 날짜 추가
+
+    private func calculateMaxExp() -> Int {
+        let currentLevel = Int(mypageView.lvLabel.text?.replacingOccurrences(of: "Lv.", with: "") ?? "1") ?? 1
+        return 100 + (currentLevel - 1) * 100
+    }
+
+    private func levelUp() {
+        let currentLevel = Int(mypageView.lvLabel.text?.replacingOccurrences(of: "Lv.", with: "") ?? "1") ?? 1
+        mypageView.lvLabel.text = "Lv.\(currentLevel + 1)"
+        
+        let newMaxExp = calculateMaxExp()
+        mypageView.exLabel.text = "0/\(newMaxExp)"
+        mypageView.exProgressView.progress = 0
+        
+        userDefaultsManager.setUserExperience(exp: 0) // 경험치 초기화
+    }
+
     private func setExperience(max: Int) {
-        let userExp = userCoreDataManager.retrieveExp().first?.exp ?? "0"
-        let newExp = Int(userExp) ?? 0
+        var userExp = userCoreDataManager.retrieveExp().first?.exp ?? "0"
+        var newExp = Int(userExp) ?? 0
         
         if newExp >= max {
-            // 경험치가 최대치에 도달하면 레벨업
-            let currentLevel = Int(mypageView.lvLabel.text?.replacingOccurrences(of: "Lv.", with: "") ?? "1") ?? 1
-            mypageView.lvLabel.text = "Lv.\(currentLevel + 1)"
-            mypageView.exLabel.text = "0/\(max + 100)"
-            userDefaultsManager.setUserExperience(exp: 0) // 경험치 초기화
+            levelUp()
         } else {
-            userDefaultsManager.setUserExperience(exp: newExp + 1) // 경험치 업데이트
-            mypageView.exLabel.text = "\(newExp + 1)/\(max)"
+            newExp += 1
+            userDefaultsManager.setUserExperience(exp: newExp) // 경험치 업데이트
+            mypageView.exLabel.text = "\(newExp)/\(max)"
+            mypageView.exProgressView.progress = Float(newExp) / Float(max)
         }
-        
-        updateProgress()
-        print(updateProgress)
         
         let today = Calendar.current.dateComponents([.day, .month, .year], from: Date())
         if !experienceDates.contains(today) {
@@ -111,6 +112,18 @@ class MypageViewController: UIViewController {
             userDefaultsManager.setExperienceDates(dates: experienceDates) // 날짜 저장
         }
         reloadDateView(date: Calendar.current.date(from: today))
+    }
+
+    private func updateProgress() {
+        let experienceText = mypageView.exLabel.text?.split(separator: "/")
+        guard let currentExp = experienceText?.first, let maxExp = experienceText?.last,
+              let currentExpValue = Float(currentExp), let maxExpValue = Float(maxExp) else {
+            return
+        }
+
+        mypageView.exProgressView.progress = currentExpValue / maxExpValue
+
+        // 경험치가 최대값에 도달했을 때 레벨업 처리 제거 (setExperience에서 처리)
     }
     
     // 캘린더 초기화 및 설정
@@ -131,13 +144,13 @@ class MypageViewController: UIViewController {
 
 extension MypageViewController: UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
     func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
-        if experienceDates.contains(dateComponents) {
+        if experienceDates.contains(where: { $0.day == dateComponents.day && $0.month == dateComponents.month && $0.year == dateComponents.year }) {
             return .customView {
                 let logoImage = UIImageView(image: UIImage(named: "Logo"))
                 let containerView = UIView()
                 containerView.addSubview(logoImage)
                 logoImage.snp.makeConstraints {
-                    $0.size.equalTo(15)
+                    $0.size.equalTo(20)
                     $0.center.equalTo(containerView)
                 }
                 return containerView
