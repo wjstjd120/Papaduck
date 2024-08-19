@@ -21,7 +21,7 @@ class WordListView: UIView {
         return button
     }()
     
-    let AllwordPlayButton: UIButton = {
+    let allwordPlayButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("All", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -82,11 +82,11 @@ class WordListView: UIView {
     }
     
     private func setupAdditionalButtons() {
-        addSubview(AllwordPlayButton)
+        addSubview(allwordPlayButton)
         addSubview(unmemorizedPlayButton)
         
         // writeButton 위치 설정 (playButton 위로)
-        AllwordPlayButton.snp.makeConstraints {
+        allwordPlayButton.snp.makeConstraints {
             $0.width.height.equalTo(50)
             $0.trailing.equalToSuperview().offset(-20)
             $0.bottom.equalTo(playButton.snp.top).offset(-20)
@@ -96,7 +96,7 @@ class WordListView: UIView {
         unmemorizedPlayButton.snp.makeConstraints {
             $0.width.height.equalTo(50)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.bottom.equalTo(AllwordPlayButton.snp.top).offset(-20)
+            $0.bottom.equalTo(allwordPlayButton.snp.top).offset(-20)
         }
     }
 }

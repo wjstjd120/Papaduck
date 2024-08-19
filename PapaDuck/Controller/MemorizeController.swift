@@ -11,6 +11,7 @@ import SnapKit
 
 class MemorizeController: UIViewController {
     var wordsBookId: UUID?
+    var mode: buttonState = .allWords
     private var wordList: [WordsEntity] = []
     private var wordViews: [UIView] = []
     private var currentIndex: Int = 0
@@ -118,8 +119,14 @@ class MemorizeController: UIViewController {
     
     private func getWordList() {
         guard let id = wordsBookId else { return }
+        let list = wordDataManager.retrieveWordsBookInfos(wordsBookId: id).shuffled()
         
-        wordList = wordDataManager.retrieveWordsBookInfos(wordsBookId: id).shuffled()
+        switch mode {
+        case .allWords:
+            wordList = list
+        case .unmemorizedWords:
+            wordList = list.filter { !$0.memorizationYn }
+        }
     }
     
     private func configureViews() -> [UIView] {
