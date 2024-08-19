@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		144D806F2C6AE8DD00C1A1D4 /* MypageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D806E2C6AE8DD00C1A1D4 /* MypageView.swift */; };
 		144D80712C6AE90100C1A1D4 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D80702C6AE90100C1A1D4 /* MypageViewController.swift */; };
+		144D80772C732E5C00C1A1D4 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D80762C732E5C00C1A1D4 /* UserDefaultsManager.swift */; };
 		4F5920692C6AED4B008101B3 /* WordsBookEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5920632C6AED4B008101B3 /* WordsBookEntity+CoreDataClass.swift */; };
 		4F59206A2C6AED4B008101B3 /* WordsBookEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5920642C6AED4B008101B3 /* WordsBookEntity+CoreDataProperties.swift */; };
 		4F59206B2C6AED4B008101B3 /* WordsEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5920652C6AED4B008101B3 /* WordsEntity+CoreDataClass.swift */; };
@@ -48,6 +49,7 @@
 /* Begin PBXFileReference section */
 		144D806E2C6AE8DD00C1A1D4 /* MypageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageView.swift; sourceTree = "<group>"; };
 		144D80702C6AE90100C1A1D4 /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
+		144D80762C732E5C00C1A1D4 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		4F5920632C6AED4B008101B3 /* WordsBookEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WordsBookEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4F5920642C6AED4B008101B3 /* WordsBookEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WordsBookEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4F5920652C6AED4B008101B3 /* WordsEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WordsEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -97,6 +99,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		144D80752C732E5200C1A1D4 /* UserDefaultsManager */ = {
+			isa = PBXGroup;
+			children = (
+				144D80762C732E5C00C1A1D4 /* UserDefaultsManager.swift */,
+			);
+			path = UserDefaultsManager;
+			sourceTree = "<group>";
+		};
 		4F59206F2C6AEDDC008101B3 /* CoreDataProperties */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +212,7 @@
 		748EE03B2C69F4D5000B74DB /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				144D80752C732E5200C1A1D4 /* UserDefaultsManager */,
 				4F5920762C6B2771008101B3 /* CoreDataManager */,
 				748EE0452C69F657000B74DB /* Fonts.swift */,
 				D6717F2B2C6B006500B28844 /* UIColor+Hex.swift */,
@@ -326,6 +337,7 @@
 				4F5920752C6AF12D008101B3 /* CreateWordsView.swift in Sources */,
 				748EE0222C69F214000B74DB /* SceneDelegate.swift in Sources */,
 				D6717F2C2C6B006500B28844 /* UIColor+Hex.swift in Sources */,
+				144D80772C732E5C00C1A1D4 /* UserDefaultsManager.swift in Sources */,
 				D6717F302C6CC34900B28844 /* CircularProgressBar.swift in Sources */,
 				144D806F2C6AE8DD00C1A1D4 /* MypageView.swift in Sources */,
 				144D80712C6AE90100C1A1D4 /* MypageViewController.swift in Sources */,
