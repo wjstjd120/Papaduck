@@ -10,10 +10,11 @@ import UIKit
 import SnapKit
 
 class MemorizeController: UIViewController {
+    var wordsBookId: UUID?
     private var memorizeViews: [UIView] = []
     private var currentIndex: Int = 0
     private var memorizeView: MemorizeView!
-    //    var animator: UIViewPropertyAnimator?
+    private let dataManager: WordsCoreDataManager = WordsCoreDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,8 @@ class MemorizeController: UIViewController {
             firstView.snp.makeConstraints {
                 $0.edges.equalToSuperview().inset(40)
             }
+        } else {
+            emptyListAlert()
         }
         
         configureEvents()
@@ -81,24 +84,52 @@ class MemorizeController: UIViewController {
                 nextView.snp.makeConstraints { make in
                     make.edges.equalToSuperview().inset(40)
                 }
+            } else {
+                emptyListAlert()
             }
             
             self.memorizeView.backgroundColor = .white
         })
     }
     
+    private func emptyListAlert() {
+        let alert = UIAlertController(title: "알림", message: "모든 단어를 확인하였습니다.", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "확인", style: .default) { (action) in
+            self.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
     private func configureViews() -> [UIView] {
-        (0...30).map { index in
+        guard let id = wordsBookId else { return [] }
+        
+        var list: [WordsEntity] = dataManager.retrieveWordsBookInfos(wordsBookId: id)
+        // 랜덤한 단어 나오게 셔플
+        list.shuffle()
+        
+        return list.map { word in
             let view = UIView()
-            let label = UILabel()
-            view.backgroundColor = .blue
+            let wordLabel = UILabel()
+            let meaningLabel = UILabel()
+            view.backgroundColor = .white
             view.layer.cornerRadius = 20
             view.clipsToBounds = true
-            label.text = "\(index) 번째 뷰"
-            label.textColor = .black
-            view.addSubview(label)
-            label.snp.makeConstraints {
+            wordLabel.text = "\(word.word ?? "")"
+            wordLabel.textColor = .black
+            meaningLabel.text = "\(word.meaning ?? "")"
+            meaningLabel.textColor = .black
+            [wordLabel, meaningLabel].forEach {
+                view.addSubview($0)
+            }
+            wordLabel.snp.makeConstraints {
                 $0.center.equalToSuperview()
+            }
+            meaningLabel.snp.makeConstraints {
+                $0.centerX.equalTo(wordLabel.snp.centerX)
+                $0.top.equalTo(wordLabel.snp.bottom).offset(30)
             }
             return view
         }
