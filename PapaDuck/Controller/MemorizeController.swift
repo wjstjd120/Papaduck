@@ -57,12 +57,12 @@ class MemorizeController: UIViewController {
         let currentWord: WordsEntity = wordList[currentIndex]
         
         if isSwipingLeft {
-            memorizeView.backgroundColor = .green
+            memorizeView.backgroundColor = .subBlue3
             wordDataManager.updateWords(entity: currentWord, newWords: currentWord.word!, newWordsMeaning: currentWord.meaning!, memorizationYn: true)
             userDataManager.updateExp(plus: 5)
             print("외웠다")
         } else {
-            memorizeView.backgroundColor = .red
+            memorizeView.backgroundColor = .subRed
             wordDataManager.updateWords(entity: currentWord, newWords: currentWord.word!, newWordsMeaning: currentWord.meaning!, memorizationYn: false)
             userDataManager.updateExp(plus: 2)
             print("못외웠다")
