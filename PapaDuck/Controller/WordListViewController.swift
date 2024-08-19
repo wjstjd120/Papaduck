@@ -17,7 +17,7 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    private var words: [WordsEntity] = []
+    var words: [WordsEntity] = []
     
     
     override func loadView() {
