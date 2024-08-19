@@ -61,6 +61,11 @@ class WordsBookCoreDataManager{
         }
     }
     
+    /// 단어장을 수정하는 메서드
+    /// - Parameters:
+    ///   - wordsBookId: 단어장 ID
+    ///   - newWordsBookName: 변경할 단어장 이름
+    ///   - newWordsExplain: 변경할 단어장 설명
     func updateWordsBook(wordsBookId: UUID, newWordsBookName: String, newWordsExplain: String) {
         let fetchRequest: NSFetchRequest<WordsBookEntity> = WordsBookEntity.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "wordsBookId == %@", wordsBookId as CVarArg)
@@ -78,6 +83,21 @@ class WordsBookCoreDataManager{
             }
         } catch {
             print("수정 실패: \(error.localizedDescription)")
+        }
+    }
+    
+    /// 같은 단어장이 있는지 체크하는 메서드
+    /// - Parameter wordsBookName: 변경하고자하는 단어장 이름
+    /// - Returns: Bool
+    func validateCheck(wordsBookName: String) -> Bool{
+        let fetchRequest = WordsBookEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "wordsBookName == %@", wordsBookName)
+        do {
+            let result = try context.fetch(fetchRequest)
+            return !result.isEmpty
+        } catch {
+            print("에러: \(error.localizedDescription)")
+            return false
         }
     }
 }

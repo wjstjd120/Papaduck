@@ -13,8 +13,13 @@ class WordTableViewCell: UITableViewCell {
     let containerView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
-        view.layer.masksToBounds = true
+        view.layer.masksToBounds = false
         view.backgroundColor = UIColor(red: 255/255, green: 254/255, blue: 242/255, alpha: 1.0)
+        
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOffset = CGSize(width: 0, height: 2)
+        view.layer.shadowRadius = 4
         
         return view
     }()
@@ -58,12 +63,12 @@ class WordTableViewCell: UITableViewCell {
         
         wordLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(30)
-            $0.top.equalTo(containerView.snp.top)
+            $0.top.equalTo(containerView.snp.top).offset(-5)
             $0.height.equalTo(60)
         }
         
         meaningLabel.snp.makeConstraints {
-            $0.top.equalTo(wordLabel.snp.bottom).inset(10)
+            $0.top.equalTo(wordLabel.snp.bottom).offset(-10)
             $0.leading.equalTo(wordLabel.snp.leading)
         }
         

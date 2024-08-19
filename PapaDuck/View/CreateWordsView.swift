@@ -58,7 +58,8 @@ class CreateWordsView: UIView{
         let button = UIButton()
         button.setTitle("저장", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.layer.cornerRadius = 30
+        button.titleLabel?.font = FontNames.subFont2.font()
+        button.layer.cornerRadius = 8
         button.backgroundColor = UIColor(red: 238/255, green: 223/255, blue: 88/255, alpha: 1.0)
         return button
     }()
@@ -67,7 +68,7 @@ class CreateWordsView: UIView{
         let button = UIButton()
         button.setTitle("삭제", for: .normal)
         button.setTitleColor(.red, for: .normal)
-        button.layer.cornerRadius = 30
+        button.layer.cornerRadius = 8
         button.backgroundColor = .white
         return button
     }()
@@ -92,44 +93,44 @@ class CreateWordsView: UIView{
         explanationTextField.leftViewMode = .always
         deleteButton.isHidden = true
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
+            $0.top.equalTo(safeAreaLayoutGuide.snp.top).offset(30)
             $0.centerX.equalTo(safeAreaLayoutGuide.snp.centerX)
-            $0.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(20)
-            $0.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-20)
+            $0.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(24)
+            $0.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-24)
             $0.height.equalTo(50)
         }
         wordsBookLabel.snp.makeConstraints {
-            $0.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(20)
-            $0.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-20)
+            $0.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(24)
+            $0.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-24)
             $0.top.equalTo(titleLabel.snp.bottom).offset(80)
         }
         wordsBookNameTextField.snp.makeConstraints {
-            $0.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(20)
-            $0.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-20)
+            $0.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(24)
+            $0.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-24)
             $0.top.equalTo(wordsBookLabel.snp.bottom).offset(15)
             $0.height.equalTo(60)
         }
         explanationLabel.snp.makeConstraints {
-            $0.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(20)
-            $0.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-20)
-            $0.top.equalTo(wordsBookNameTextField.snp.bottom).offset(80)
+            $0.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(24)
+            $0.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-24)
+            $0.top.equalTo(wordsBookNameTextField.snp.bottom).offset(50)
         }
         explanationTextField.snp.makeConstraints {
-            $0.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(20)
-            $0.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-20)
+            $0.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(24)
+            $0.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-24)
             $0.top.equalTo(explanationLabel.snp.bottom).offset(15)
             $0.height.equalTo(60)
         }
         deleteButton.snp.makeConstraints {
             $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-50)
-            $0.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(20)
-            $0.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-20)
+            $0.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(24)
+            $0.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-24)
             $0.height.equalTo(60)
         }
         saveButton.snp.makeConstraints {
             $0.bottom.equalTo(deleteButton.snp.top).offset(-10)
-            $0.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(20)
-            $0.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-20)
+            $0.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(24)
+            $0.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-24)
             $0.height.equalTo(60)
         }
         errorLabel.snp.makeConstraints {
