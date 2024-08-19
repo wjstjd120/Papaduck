@@ -12,23 +12,24 @@ import SnapKit
 class MemorizeView: UIView {
     let borderView: UIView = {
         let view = UIView()
-        view.backgroundColor = .red
+        view.backgroundColor = .gray
+        
         return view
     }()
     
-//    let wordView: UIView = {
-//        let view = UIView()
-//        view.backgroundColor = .blue
-//        view.layer.cornerRadius = 20
-//        view.clipsToBounds = true
-//        return view
-//    }()
-//    
-//    let wordLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "apple"
-//        return label
-//    }()
+    let trueLabel: UILabel = {
+        let label = UILabel()
+        label.text = "외웠어요!"
+        label.textColor = .systemGreen
+        return label
+    }()
+    
+    let falseLabel: UILabel = {
+        let label = UILabel()
+        label.text = "못외웠어요..."
+        label.textColor = .systemRed
+        return label
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,9 +42,9 @@ class MemorizeView: UIView {
     }
     
     private func configureUI() {
-//        borderView.addSubview(wordView)
-        self.addSubview(borderView)
-//        wordView.addSubview(wordLabel)
+        [borderView, trueLabel, falseLabel].forEach {
+            self.addSubview($0)
+        }
         
         borderView.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide).offset(40)
@@ -51,14 +52,14 @@ class MemorizeView: UIView {
             $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-120)
         }
         
-//        wordView.snp.makeConstraints {
-//            $0.top.equalToSuperview().offset(20)
-//            $0.left.right.equalToSuperview().inset(20)
-//            $0.bottom.equalToSuperview().offset(-80)
-//        }
+        trueLabel.snp.makeConstraints {
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-30)
+            $0.left.equalToSuperview().offset(20)
+        }
         
-//        wordLabel.snp.makeConstraints {
-//            $0.center.equalToSuperview()
-//        }
+        falseLabel.snp.makeConstraints {
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-30)
+            $0.right.equalToSuperview().offset(-20)
+        }
     }
 }

@@ -80,6 +80,11 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
     
     @objc func playWord() {
         // 단어장 플레이 화면
+        if let book = selectedBook, let id = book.wordsBookId {
+            let memorizeController = MemorizeController()
+            memorizeController.wordsBookId = id
+            navigationController?.pushViewController(memorizeController, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
