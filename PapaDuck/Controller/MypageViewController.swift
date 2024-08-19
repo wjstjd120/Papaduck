@@ -131,7 +131,7 @@ class MypageViewController: UIViewController {
 
 extension MypageViewController: UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
     func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
-        if experienceDates.contains(dateComponents) {
+        if experienceDates.contains(where: { $0.day == dateComponents.day && $0.month == dateComponents.month && $0.year == dateComponents.year }) {
             return .customView {
                 let logoImage = UIImageView(image: UIImage(named: "Logo"))
                 let containerView = UIView()
