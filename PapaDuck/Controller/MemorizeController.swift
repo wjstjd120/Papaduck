@@ -11,10 +11,12 @@ import SnapKit
 
 class MemorizeController: UIViewController {
     var wordsBookId: UUID?
-    private var memorizeViews: [UIView] = []
+    private var wordList: [WordsEntity] = []
+    private var wordViews: [UIView] = []
     private var currentIndex: Int = 0
     private var memorizeView: MemorizeView!
-    private let dataManager: WordsCoreDataManager = WordsCoreDataManager()
+    private let wordDataManager: WordsCoreDataManager = WordsCoreDataManager()
+    private let userDataManager: UserCoreDataManager = UserCoreDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,10 +24,11 @@ class MemorizeController: UIViewController {
         memorizeView = MemorizeView()
         self.view = memorizeView
         
-        memorizeViews = configureViews()
+        getWordList()
+        wordViews = configureViews()
         
         // 첫 번째 뷰를 초기 설정
-        if let firstView = memorizeViews.first {
+        if let firstView = wordViews.first {
             firstView.frame = self.view.bounds
             memorizeView.borderView.addSubview(firstView)
             firstView.snp.makeConstraints {
@@ -51,17 +54,21 @@ class MemorizeController: UIViewController {
         let direction: UISwipeGestureRecognizer.Direction = gesture.direction
         let isSwipingLeft = direction == .left
         
-        // "외웠다" 또는 "못외웠다" 출력
+        let currentWord: WordsEntity = wordList[currentIndex]
+        
         if isSwipingLeft {
             memorizeView.backgroundColor = .green
+            wordDataManager.updateWords(entity: currentWord, newWords: currentWord.word!, newWordsMeaning: currentWord.meaning!, memorizationYn: true)
+            userDataManager.updateExp(plus: 5)
             print("외웠다")
         } else {
             memorizeView.backgroundColor = .red
+            wordDataManager.updateWords(entity: currentWord, newWords: currentWord.word!, newWordsMeaning: currentWord.meaning!, memorizationYn: false)
+            userDataManager.updateExp(plus: 2)
             print("못외웠다")
         }
         
-        // 현재 보여주고 있는 뷰를 삭제
-        guard let currentView = memorizeViews.first else { return }
+        guard let currentView = wordViews.first else { return }
         
         // 다음 뷰 설정
         let translationX = isSwipingLeft ? -self.memorizeView.borderView.bounds.width : self.memorizeView.borderView.bounds.width
@@ -75,15 +82,16 @@ class MemorizeController: UIViewController {
             
             // 애니메이션 완료 후 이전 뷰를 제거
             currentView.removeFromSuperview()
-            self.memorizeViews.removeFirst()
+            self.wordViews.removeFirst()
             
             // 다음 뷰가 있다면 추가
-            if let nextView = self.memorizeViews.first {
+            if let nextView = self.wordViews.first {
                 nextView.frame = self.memorizeView.borderView.bounds
                 self.memorizeView.borderView.addSubview(nextView)
                 nextView.snp.makeConstraints { make in
                     make.edges.equalToSuperview().inset(40)
                 }
+                currentIndex += 1
             } else {
                 emptyListAlert()
             }
@@ -103,14 +111,14 @@ class MemorizeController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    private func getWordList() {
+        guard let id = wordsBookId else { return }
+        
+        wordList = wordDataManager.retrieveWordsBookInfos(wordsBookId: id).shuffled()
+    }
+    
     private func configureViews() -> [UIView] {
-        guard let id = wordsBookId else { return [] }
-        
-        var list: [WordsEntity] = dataManager.retrieveWordsBookInfos(wordsBookId: id)
-        // 랜덤한 단어 나오게 셔플
-        list.shuffle()
-        
-        return list.map { word in
+        return wordList.map { word in
             let view = UIView()
             let wordLabel = UILabel()
             let meaningLabel = UILabel()
