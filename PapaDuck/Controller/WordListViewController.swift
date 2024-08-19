@@ -19,6 +19,11 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
     
     private var words: [WordsEntity] = []
     
+    private var isActive: Bool = false {
+        didSet {
+            showActionButtons()
+        }
+    }
     
     override func loadView() {
         self.view = wordListView
@@ -34,7 +39,11 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
         
         wordListView.tableView.delegate = self
         wordListView.tableView.dataSource = self
-        wordListView.playButton.addTarget(self, action: #selector(playWord), for: .touchUpInside)
+        
+        // 버튼들 액션 설정
+        wordListView.playButton.addTarget(self, action: #selector(didTapPlayButton), for: .touchUpInside)
+        wordListView.AllwordPlayButton.addTarget(self, action: #selector(playAllWord), for: .touchUpInside)
+        wordListView.unmemorizedPlayButton.addTarget(self, action: #selector(playUnmemorizedWord), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,14 +87,68 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    @objc func playWord() {
-        // 단어장 플레이 화면
+    // 버튼 클릭
+    @objc private func didTapPlayButton() {
+            isActive.toggle()
+        }
+    
+    private func showActionButtons() {
+        popButtons()
+        rotateFloatingButton()
+    }
+    
+    private func popButtons() {
+        let buttons = [wordListView.AllwordPlayButton, wordListView.unmemorizedPlayButton]
+        
+        for (index, button) in buttons.enumerated() {
+            if isActive {
+                button.layer.transform = CATransform3DMakeScale(0.4, 0.4, 1)
+                UIView.animate(withDuration: 0.3, delay: 0.1 * Double(index), usingSpringWithDamping: 0.55, initialSpringVelocity: 0.3, options: [.curveEaseInOut], animations: {
+                    button.layer.transform = CATransform3DIdentity
+                    button.alpha = 1.0
+                })
+            } else {
+                UIView.animate(withDuration: 0.15, delay: 0.1 * Double(index), options: []) {
+                    button.layer.transform = CATransform3DMakeScale(0.4, 0.4, 0.1)
+                    button.alpha = 0.0
+                }
+            }
+        }
+    }
+    
+    private func rotateFloatingButton() {
+        let animation = CABasicAnimation(keyPath: "transform.rotation.z")
+        let fromValue = isActive ? 0 : CGFloat.pi / 4
+        let toValue = isActive ? CGFloat.pi / 4 : 0
+        animation.fromValue = fromValue
+        animation.toValue = toValue
+        animation.duration = 0.3
+        animation.fillMode = .forwards
+        animation.isRemovedOnCompletion = false
+        wordListView.playButton.layer.add(animation, forKey: nil)
+    }
+    
+    // AllwordPlayButton 클릭 시 호출되는 메서드
+    @objc func playAllWord() {
         if let book = selectedBook, let id = book.wordsBookId {
             let memorizeController = MemorizeController()
             memorizeController.wordsBookId = id
             navigationController?.pushViewController(memorizeController, animated: true)
         }
     }
+    
+    // unmemorizedPlayButton 클릭 시 호출되는 메서드
+    @objc func playUnmemorizedWord() {
+    }
+    
+//    @objc func playWord() {
+//        // 단어장 플레이 화면
+//        if let book = selectedBook, let id = book.wordsBookId {
+//            let memorizeController = MemorizeController()
+//            memorizeController.wordsBookId = id
+//            navigationController?.pushViewController(memorizeController, animated: true)
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return words.count // 수정
@@ -100,7 +163,7 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
         cell.wordLabel.text = word.word
         cell.meaningLabel.text = word.meaning
         cell.memorizeLabel.text = word.memorizationYn ? "암기" : "미암기"
-        cell.memorizeLabel.textColor = word.memorizationYn ? UIColor.green : UIColor.red
+        cell.memorizeLabel.textColor = word.memorizationYn ? UIColor.subBlue3 : UIColor.subRed
         
         return cell
     }
