@@ -12,8 +12,8 @@ import SnapKit
 class MemorizeView: UIView {
     let borderView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray
-        
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 30
         return view
     }()
     

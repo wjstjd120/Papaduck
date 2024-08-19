@@ -58,11 +58,13 @@ class MemorizeController: UIViewController {
         
         if isSwipingLeft {
             memorizeView.backgroundColor = .subBlue3
+            memorizeView.borderView.backgroundColor = .subBlue3
             wordDataManager.updateWords(entity: currentWord, newWords: currentWord.word!, newWordsMeaning: currentWord.meaning!, memorizationYn: true)
             userDataManager.updateExp(plus: 5)
             print("외웠다")
         } else {
             memorizeView.backgroundColor = .subRed
+            memorizeView.borderView.backgroundColor = .subRed
             wordDataManager.updateWords(entity: currentWord, newWords: currentWord.word!, newWordsMeaning: currentWord.meaning!, memorizationYn: false)
             userDataManager.updateExp(plus: 2)
             print("못외웠다")
@@ -96,7 +98,10 @@ class MemorizeController: UIViewController {
                 emptyListAlert()
             }
             
-            self.memorizeView.backgroundColor = .white
+            UIView.animate(withDuration: 0.3) {
+                self.memorizeView.backgroundColor = .white
+                self.memorizeView.borderView.backgroundColor = .white
+            }
         })
     }
     
@@ -122,13 +127,19 @@ class MemorizeController: UIViewController {
             let view = UIView()
             let wordLabel = UILabel()
             let meaningLabel = UILabel()
-            view.backgroundColor = .white
+            view.backgroundColor = .subYellow
             view.layer.cornerRadius = 20
-            view.clipsToBounds = true
+            view.layer.shadowColor = UIColor.black.cgColor
+            view.layer.shadowOpacity = 0.2
+            view.layer.shadowOffset = CGSize(width: 0, height: 2)
+            view.layer.shadowRadius = 4
+            view.layer.masksToBounds = false
             wordLabel.text = "\(word.word ?? "")"
             wordLabel.textColor = .black
+            wordLabel.font = .boldSystemFont(ofSize: 30)
             meaningLabel.text = "\(word.meaning ?? "")"
-            meaningLabel.textColor = .black
+            meaningLabel.textColor = .gray
+            meaningLabel.font = .systemFont(ofSize: 15)
             [wordLabel, meaningLabel].forEach {
                 view.addSubview($0)
             }
