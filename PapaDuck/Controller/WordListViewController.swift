@@ -42,7 +42,7 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
         
         // 버튼들 액션 설정
         wordListView.playButton.addTarget(self, action: #selector(didTapPlayButton), for: .touchUpInside)
-        wordListView.AllwordPlayButton.addTarget(self, action: #selector(playAllWord), for: .touchUpInside)
+        wordListView.allwordPlayButton.addTarget(self, action: #selector(playAllWord), for: .touchUpInside)
         wordListView.unmemorizedPlayButton.addTarget(self, action: #selector(playUnmemorizedWord), for: .touchUpInside)
     }
     
@@ -98,7 +98,7 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     private func popButtons() {
-        let buttons = [wordListView.AllwordPlayButton, wordListView.unmemorizedPlayButton]
+        let buttons = [wordListView.allwordPlayButton, wordListView.unmemorizedPlayButton]
         
         for (index, button) in buttons.enumerated() {
             if isActive {
@@ -139,6 +139,12 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
     
     // unmemorizedPlayButton 클릭 시 호출되는 메서드
     @objc func playUnmemorizedWord() {
+        if let book = selectedBook, let id = book.wordsBookId {
+            let memorizeController = MemorizeController()
+            memorizeController.wordsBookId = id
+            memorizeController.mode = .unmemorizedWords
+            navigationController?.pushViewController(memorizeController, animated: true)
+        }
     }
     
 //    @objc func playWord() {
