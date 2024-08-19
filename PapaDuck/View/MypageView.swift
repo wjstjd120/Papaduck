@@ -166,19 +166,6 @@ class MypageView: UIView {
             $0.top.equalTo(headLabel.snp.bottom)
         }
         
-//        nameLabel.snp.makeConstraints{
-//            $0.leading.equalTo(userStackVeiw.snp.leading).offset(10)
-//            $0.width.equalTo(80)
-//        }
-//        
-//        lvLabel.snp.makeConstraints{
-//            $0.leading.equalTo(nameLabel.snp.trailing).offset(10)
-//        }
-//        
-//        exLabel.snp.makeConstraints{
-//            $0.leading.equalTo(lvLabel.snp.trailing).offset(30)
-//        }
-//        
         //레벨별 이미지
         lvImage.snp.makeConstraints{
             $0.width.height.equalTo(95)
