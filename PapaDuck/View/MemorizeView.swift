@@ -20,14 +20,14 @@ class MemorizeView: UIView {
     let trueLabel: UILabel = {
         let label = UILabel()
         label.text = "외웠어요!"
-        label.textColor = .systemGreen
+        label.textColor = .subBlue3
         return label
     }()
     
     let falseLabel: UILabel = {
         let label = UILabel()
         label.text = "못외웠어요..."
-        label.textColor = .systemRed
+        label.textColor = .subRed
         return label
     }()
     
