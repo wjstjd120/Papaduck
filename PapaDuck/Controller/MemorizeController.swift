@@ -15,7 +15,8 @@ class MemorizeController: UIViewController {
     private var wordViews: [UIView] = []
     private var currentIndex: Int = 0
     private var memorizeView: MemorizeView!
-    private let dataManager: WordsCoreDataManager = WordsCoreDataManager()
+    private let wordDataManager: WordsCoreDataManager = WordsCoreDataManager()
+    private let userDataManager: UserCoreDataManager = UserCoreDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,11 +58,13 @@ class MemorizeController: UIViewController {
         
         if isSwipingLeft {
             memorizeView.backgroundColor = .green
-            dataManager.updateWords(entity: currentWord, newWords: currentWord.word!, newWordsMeaning: currentWord.meaning!, memorizationYn: true)
+            wordDataManager.updateWords(entity: currentWord, newWords: currentWord.word!, newWordsMeaning: currentWord.meaning!, memorizationYn: true)
+            userDataManager.updateExp(plus: 5)
             print("외웠다")
         } else {
             memorizeView.backgroundColor = .red
-            dataManager.updateWords(entity: currentWord, newWords: currentWord.word!, newWordsMeaning: currentWord.meaning!, memorizationYn: false)
+            wordDataManager.updateWords(entity: currentWord, newWords: currentWord.word!, newWordsMeaning: currentWord.meaning!, memorizationYn: false)
+            userDataManager.updateExp(plus: 2)
             print("못외웠다")
         }
         
@@ -88,6 +91,7 @@ class MemorizeController: UIViewController {
                 nextView.snp.makeConstraints { make in
                     make.edges.equalToSuperview().inset(40)
                 }
+                currentIndex += 1
             } else {
                 emptyListAlert()
             }
@@ -110,7 +114,7 @@ class MemorizeController: UIViewController {
     private func getWordList() {
         guard let id = wordsBookId else { return }
         
-        wordList = dataManager.retrieveWordsBookInfos(wordsBookId: id).shuffled()
+        wordList = wordDataManager.retrieveWordsBookInfos(wordsBookId: id).shuffled()
     }
     
     private func configureViews() -> [UIView] {
