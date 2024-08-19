@@ -38,7 +38,7 @@ class WordTableViewCell: UITableViewCell {
     
     let memorizeLabel: UILabel = {
         let label = UILabel()
-        label.font = FontNames.main2Font2.font()
+        label.font = FontNames.main2Font.font()
         return label
     }()
     
