@@ -87,21 +87,12 @@ class MainView: UIView {
         setupView()
         setupConstraints()
         setupCollectionView()
-        printAvailableFonts()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
-    func printAvailableFonts() {
-        for family in UIFont.familyNames {
-            print("Family: \(family)")
-            for font in UIFont.fontNames(forFamilyName: family) {
-                print("    Font: \(font)")
-            }
-        }
-    }
+
     
     // MARK: - Setup
     private func setupView() {
