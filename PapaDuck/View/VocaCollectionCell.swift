@@ -104,14 +104,14 @@ class VocaCollectionCell: UICollectionViewCell {
         vocaNameLabel.text = model.wordsBookName
         descriptionLabel.text = model.wordsExplain
 
-        // 단어장의 단어 개수
-        let totalWordsCount = MainController().wordsBookCount(wordsBookId: model.wordsBookId ?? UUID())
+        // 단어장의 외운 단어 비율 계산
+        let learnedPercentage = MainController().wordsBookCount(wordsBookId: model.wordsBookId ?? UUID())
            
+        // 외운 단어 비율을 레이블에 표시
+        wordCountLabel.text = "\(learnedPercentage)%"
         
-        // 단어 개수 표시
-        wordCountLabel.text = "\(totalWordsCount)개"
-        let progress = 0.75
-        let progressPercentage = Int(progress * 100)
+        // 진행 바에 비율 설정 (0 ~ 1 사이의 값으로 설정)
+        let progress = Double(learnedPercentage) / 100.0
         progressBarView.setProgress(diameter: 60, progress: progress)
     }
     

@@ -50,16 +50,31 @@ class MainController: UIViewController {
         }
     }
     
-    //단어장의 단어 갯수 조회
-    /// 단어장 UUID로 단어장에 포함되어있는 단어를 조회하는 메서드  - Returns: [단어]
-    /// [단어] > 카운트
-    /// - Parameter wordsBookId: 단어장 ID
-    /// - Returns: 단어 개수
+    // 단어장 총 단어 및 외운단어 조회
+    /// 단어장 UUID 단어장 포함되어있는 단어조회 - Returns: [단어]
+    /// 총 갯수 : [단어] > 카운트
+    /// 외운단어 갯수 : filter [단어] > 카운트
     func wordsBookCount(wordsBookId: UUID) -> Int {
-        let words = wordsCoreDataManager.retrieveWordsBookInfos(wordsBookId: wordsBookId)
-        return words.count
+        do {
+            // 단어장에 포함된 모든 단어 조회
+            let words = wordsCoreDataManager.retrieveWordsBookInfos(wordsBookId: wordsBookId)
+            let totalWords = words.count
+            
+            // 외운 단어만 필터링
+            let learnedWords = words.filter { $0.memorizationYn }.count
+            
+            guard totalWords > 0 else {
+                return 0 // Avoid division by zero
+            }
+            
+            let learnedPercentage = (Double(learnedWords) / Double(totalWords)) * 100
+            
+            return Int(learnedPercentage)
+        } catch {
+            print("Failed to fetch words: \(error)")
+            return 0
+        }
     }
-    
     
     // MARK: - Actions
     
