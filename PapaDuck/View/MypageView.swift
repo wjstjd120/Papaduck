@@ -13,7 +13,7 @@ class MypageView: UIView {
     private let headLabel: UILabel = {
         let label = UILabel()
         label.text = "머리심기"
-        label.font = .boldSystemFont(ofSize: 25)
+        label.font = FontNames.mainFont.font()
         label.textColor = .black
         return label
     }()
@@ -21,7 +21,8 @@ class MypageView: UIView {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "파파덕"
-        label.font = .boldSystemFont(ofSize: 25)
+        label.font = FontNames.subFont.font()
+        label.textAlignment = .left
         label.textColor = .black
         return label
     }()
@@ -29,8 +30,9 @@ class MypageView: UIView {
     public var lvLabel: UILabel = {
         let label = UILabel()
         label.text = "Lv.1"
-        label.font = .boldSystemFont(ofSize: 25)
+        label.font = FontNames.thinFont3.font()
         label.textColor = .black
+        label.textAlignment = .left
         return label
     }()
     
@@ -49,7 +51,7 @@ class MypageView: UIView {
         return image
     }()
     
-    public var userStackVeiw: UIStackView = {
+    public var userStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 10
@@ -81,7 +83,7 @@ class MypageView: UIView {
     public var registrationnumber: UILabel = {
         let label = UILabel()
         label.text = "0"
-        label.font = .boldSystemFont(ofSize: 30)
+        label.font = FontNames.main2Font.font()
         label.textColor = .black
         return label
     }()
@@ -90,7 +92,7 @@ class MypageView: UIView {
     public var memorizingnumber: UILabel = {
         let label = UILabel()
         label.text = "0"
-        label.font = .boldSystemFont(ofSize: 30)
+        label.font = FontNames.main2Font.font()
         label.textColor = .black
         return label
     }()
@@ -98,7 +100,7 @@ class MypageView: UIView {
     private let registrationText: UILabel = {
         let label = UILabel()
         label.text = "등록 단어 갯수"
-        label.font = .boldSystemFont(ofSize: 20)
+        label.font = FontNames.main2Font.font()
         label.textColor = .black
         return label
     }()
@@ -106,7 +108,7 @@ class MypageView: UIView {
     private var memorizingText: UILabel = {
         let label = UILabel()
         label.text = "암기 단어 갯수"
-        label.font = .boldSystemFont(ofSize: 20)
+        label.font = FontNames.main2Font.font()
         label.textColor = .black
         return label
     }()
@@ -147,47 +149,58 @@ class MypageView: UIView {
     }
     
     private func mypageLayout() {
-        [headLabel, userStackVeiw, exProgressView, calendarView, registrationStackView, memorizingStackView, layOutStackView].forEach { self.addSubview($0) } // 마이페이지 , 스텍뷰
-        [nameLabel, lvLabel, exLabel, lvImage].forEach { userStackVeiw.addArrangedSubview($0) } // 스텍뷰 안에 집어넣음
-        [registrationnumber, registrationText].forEach { registrationStackView.addArrangedSubview($0) } // 등록된 단어 갯수
-        [memorizingnumber, memorizingText].forEach { memorizingStackView.addArrangedSubview($0) } // 등록 암기 갯수
-        [registrationStackView, memorizingStackView].forEach{ layOutStackView.addArrangedSubview($0) } // 단어, 암기 스택뷰
+        [headLabel, userStackView, exProgressView, calendarView, layOutStackView].forEach { addSubview($0) }
+        [nameLabel, lvLabel, exLabel, lvImage].forEach { userStackView.addArrangedSubview($0) }
+        [registrationnumber, registrationText].forEach { registrationStackView.addArrangedSubview($0) }
+        [memorizingnumber, memorizingText].forEach { memorizingStackView.addArrangedSubview($0) }
+        [registrationStackView, memorizingStackView].forEach { layOutStackView.addArrangedSubview($0) }
         
-        //헤더뷰 레이아웃
-        headLabel.snp.makeConstraints{
+        // 헤더뷰 레이아웃
+        headLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(80)
+            $0.top.equalTo(60)
         }
         
-        userStackVeiw.snp.makeConstraints{
+        userStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(320)
-            $0.height.equalTo(100)
             $0.top.equalTo(headLabel.snp.bottom)
+            $0.width.equalTo(320) // 최대 너비 설정
+            $0.height.equalTo(100)
         }
         
-        //레벨별 이미지
-        lvImage.snp.makeConstraints{
+        nameLabel.snp.makeConstraints {
+            $0.width.lessThanOrEqualTo(100) // 최대 너비 설정
+        }
+        
+        lvLabel.snp.makeConstraints {
+            $0.width.lessThanOrEqualTo(50) // 최대 너비 설정
+        }
+        
+        exLabel.snp.makeConstraints {
+            $0.width.lessThanOrEqualTo(60) // 최대 너비 설정
+        }
+        
+        lvImage.snp.makeConstraints {
             $0.width.height.equalTo(95)
         }
         
-        exProgressView.snp.makeConstraints{
+        exProgressView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(userStackVeiw.snp.bottom).offset(20)
+            $0.top.equalTo(userStackView.snp.bottom).offset(20)
             $0.width.equalTo(320)
             $0.height.equalTo(10)
         }
         
-        layOutStackView.snp.makeConstraints{
+        layOutStackView.snp.makeConstraints {
             $0.top.equalTo(exProgressView.snp.bottom).offset(20)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(320)
             $0.height.equalTo(80)
         }
         
-        calendarView.snp.makeConstraints{
+        calendarView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(layOutStackView.snp.bottom).offset(10)
+            $0.top.equalTo(layOutStackView.snp.bottom)
             $0.width.equalTo(320)
             $0.height.equalTo(450)
         }

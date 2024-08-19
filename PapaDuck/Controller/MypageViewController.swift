@@ -32,6 +32,7 @@ class MypageViewController: UIViewController {
         memorizingNumbers()
         lvimageChange()
         loadUserExperience()
+        createWordMarkerToDateView()
     }
     
     // 총 등록단어 갯수 확인
@@ -89,22 +90,11 @@ class MypageViewController: UIViewController {
         let newMaxExp = calculateMaxExp()
         mypageView.exLabel.text = "0/\(newMaxExp)"
         mypageView.exProgressView.progress = 0
-        
+
         userDefaultsManager.setUserExperience(exp: 0) // 경험치 초기화
     }
 
-    private func setExperience(max: Int) {
-        var userExp = userCoreDataManager.retrieveExp().first?.exp ?? "0"
-        var newExp = Int(userExp) ?? 0
-        
-        if newExp >= max {
-            levelUp()
-        } else {
-            newExp += 1
-            userDefaultsManager.setUserExperience(exp: newExp) // 경험치 업데이트
-            mypageView.exLabel.text = "\(newExp)/\(max)"
-            mypageView.exProgressView.progress = Float(newExp) / Float(max)
-        }
+    private func createWordMarkerToDateView() {
         
         let today = Calendar.current.dateComponents([.day, .month, .year], from: Date())
         if !experienceDates.contains(today) {
