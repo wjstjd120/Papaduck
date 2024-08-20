@@ -76,12 +76,12 @@ class MemorizeView: UIView {
         }
         
         trueLabel.snp.makeConstraints {
-            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-30)
+            $0.bottom.equalTo(borderView.snp.bottom).offset(50)
             $0.left.equalToSuperview().offset(20)
         }
         
         falseLabel.snp.makeConstraints {
-            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-30)
+            $0.bottom.equalTo(borderView.snp.bottom).offset(50)
             $0.right.equalToSuperview().offset(-20)
         }
         
