@@ -11,13 +11,15 @@ class UserDefaultsManager {
     private let defaults = UserDefaults.standard
     private let expKey = "userExperience"
     private let datesKey = "experienceDates"
-
-    func getUserExperience() -> Int {
-        return defaults.integer(forKey: expKey)
-    }
     
-    func setUserExperience(exp: Int) {
-        defaults.set(exp, forKey: expKey)
+    func getUserExperience() -> Int {
+            // 예시 코드: 실제 저장된 경험치 값을 반환
+            return UserDefaults.standard.integer(forKey: "userExperience")
+        }
+
+        func setUserExperience(exp: Int) {
+            // 예시 코드: 경험치 값을 저장
+            UserDefaults.standard.set(exp, forKey: "userExperience")
     }
     
     func getExperienceDates() -> [DateComponents] {

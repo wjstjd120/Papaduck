@@ -65,6 +65,11 @@ class MypageViewController: UIViewController {
         }
     }
     
+    private func calculateMaxExp() -> Int {
+        let currentLevel = Int(mypageView.lvLabel.text?.replacingOccurrences(of: "Lv.", with: "") ?? "1") ?? 1
+        return 100 + (currentLevel - 1) * 100
+    }
+
     private func loadUserExperience() {
         let userExp = userCoreDataManager.retrieveExp().first?.exp ?? "0"
         let currentExp = Int(userExp) ?? 0
@@ -78,22 +83,27 @@ class MypageViewController: UIViewController {
         }
     }
 
-    private func calculateMaxExp() -> Int {
-        let currentLevel = Int(mypageView.lvLabel.text?.replacingOccurrences(of: "Lv.", with: "") ?? "1") ?? 1
-        return 100 + (currentLevel - 1) * 100
-    }
-
     private func levelUp() {
         let currentLevel = Int(mypageView.lvLabel.text?.replacingOccurrences(of: "Lv.", with: "") ?? "1") ?? 1
         mypageView.lvLabel.text = "Lv.\(currentLevel + 1)"
         
         let newMaxExp = calculateMaxExp()
+        
         mypageView.exLabel.text = "0/\(newMaxExp)"
         mypageView.exProgressView.progress = 0
 
-        userDefaultsManager.setUserExperience(exp: 0) // 경험치 초기화
-    }
+        // 유저디폴트 경험치를 0으로 초기화
+        userDefaultsManager.setUserExperience(exp: 0)
 
+        if let userEntity = userCoreDataManager.retrieveExp().first,
+           let currentExpInt = Int(userEntity.exp ?? "0") {
+            // 현재 경험치의 음수 값을 전달하여 0으로 리셋
+            userCoreDataManager.updateExp(plus: -currentExpInt)
+        } else {
+            // 만약 currentExp가 nil이라면, 0으로 리셋
+            userCoreDataManager.updateExp(plus: 0)
+        }
+    }
     private func createWordMarkerToDateView() {
         
         let today = Calendar.current.dateComponents([.day, .month, .year], from: Date())
@@ -112,8 +122,6 @@ class MypageViewController: UIViewController {
         }
 
         mypageView.exProgressView.progress = currentExpValue / maxExpValue
-
-        // 경험치가 최대값에 도달했을 때 레벨업 처리 제거 (setExperience에서 처리)
     }
     
     // 캘린더 초기화 및 설정
