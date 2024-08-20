@@ -48,7 +48,7 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        isActive = false
         if let book = selectedBook {
             loadWordsFromSelectedBook(book)
         }
@@ -89,8 +89,8 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
     
     // 버튼 클릭
     @objc private func didTapPlayButton() {
-            isActive.toggle()
-        }
+        isActive.toggle()
+    }
     
     private func showActionButtons() {
         popButtons()
