@@ -14,12 +14,14 @@ struct Font {
     func font() -> UIFont? {
         return UIFont(name: name, size: size)
     }
+    
 }
 
 struct FontNames {
     static let mainFont: Font = Font(name: "ChangwonDangamAsac", size: 40.0)
     static let mainFont2: Font = Font(name: "ChangwonDangamAsac", size: 30.0)
     static let mainFont3: Font = Font(name: "ChangwonDangamAsac", size: 20.0)
+    static let mainFont4: Font = Font(name: "ChangwonDangamAsac", size: 35.0)
     
     static let main2Font: Font = Font(name: "Peoplefirst Neat&Loud TTF", size: 24.0)
     static let main2Font2: Font = Font(name: "Peoplefirst Neat&Loud TTF", size: 20.0)
@@ -33,7 +35,7 @@ struct FontNames {
     static let thinFont: Font = Font(name: "LINESeedSansKR-Regular", size: 10.0)
     static let thinFont2: Font = Font(name: "LINESeedSansKR-Regular", size: 15.0)
     static let thinFont3: Font = Font(name: "LINESeedSansKR-Regular", size: 20.0)
-    
+    static let thinFont4: Font = Font(name: "LINESeedSansKR-Regular", size: 12.0)
     
     
     static func allFonts() -> [(font: UIFont?, name: String, size: CGFloat)] {
@@ -44,5 +46,5 @@ struct FontNames {
             (thinFont.font(), thinFont.name, thinFont.size)
         ]
     }
-    
 }
+

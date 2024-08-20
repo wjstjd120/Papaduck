@@ -31,7 +31,9 @@ extension UIColor {
         "subYellow": "#FFFBE6",
         "subBlue" : "#72CBE8",
         "subBlue2" : "#BFCFD4",
-        "subBlack" : "#252525"
+        "subBlue3" : "#53B2E8",
+        "subBlack" : "#252525",
+        "subRed" : "#DD6565"
     ]
 
     static func color(named name: String) -> UIColor? {
@@ -43,5 +45,7 @@ extension UIColor {
     static var subYellow: UIColor { return color(named: "subYellow")! }
     static var subBlue: UIColor { return color(named: "subBlue")! }
     static var subBlue2: UIColor { return color(named: "subBlue2")! }
+    static var subBlue3: UIColor { return color(named: "subBlue3")! }
     static var subBlack: UIColor { return color(named: "subBlack")! }
+    static var subRed: UIColor { return color(named: "subRed")! }
 }

@@ -11,6 +11,7 @@ import SnapKit
 
 class MemorizeController: UIViewController {
     var wordsBookId: UUID?
+    var mode: buttonState = .allWords
     private var wordList: [WordsEntity] = []
     private var wordViews: [UIView] = []
     private var currentIndex: Int = 0
@@ -57,12 +58,14 @@ class MemorizeController: UIViewController {
         let currentWord: WordsEntity = wordList[currentIndex]
         
         if isSwipingLeft {
-            memorizeView.backgroundColor = .green
+            memorizeView.backgroundColor = .subBlue3
+            memorizeView.borderView.backgroundColor = .subBlue3
             wordDataManager.updateWords(entity: currentWord, newWords: currentWord.word!, newWordsMeaning: currentWord.meaning!, memorizationYn: true)
             userDataManager.updateExp(plus: 5)
             print("외웠다")
         } else {
-            memorizeView.backgroundColor = .red
+            memorizeView.backgroundColor = .subRed
+            memorizeView.borderView.backgroundColor = .subRed
             wordDataManager.updateWords(entity: currentWord, newWords: currentWord.word!, newWordsMeaning: currentWord.meaning!, memorizationYn: false)
             userDataManager.updateExp(plus: 2)
             print("못외웠다")
@@ -96,8 +99,29 @@ class MemorizeController: UIViewController {
                 emptyListAlert()
             }
             
-            self.memorizeView.backgroundColor = .white
+            UIView.animate(withDuration: 0.3) {
+                self.memorizeView.backgroundColor = .white
+                self.memorizeView.borderView.backgroundColor = .white
+            }
         })
+    }
+    
+    @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
+        guard let wordLabel = gesture.view as? UILabel else { return }
+        
+        // view 내의 meaningLabel을 찾아서 처리
+        if let meaningLabel = wordLabel.superview?.subviews.compactMap({ $0 as? UILabel }).last {
+            switch gesture.state {
+            case .began:
+                // 터치가 시작되면 meaningLabel을 보이게 설정
+                meaningLabel.isHidden = false
+            case .ended, .cancelled:
+                // 터치가 끝나면 meaningLabel을 숨김
+                meaningLabel.isHidden = true
+            default:
+                break
+            }
+        }
     }
     
     private func emptyListAlert() {
@@ -113,8 +137,14 @@ class MemorizeController: UIViewController {
     
     private func getWordList() {
         guard let id = wordsBookId else { return }
+        let list = wordDataManager.retrieveWordsBookInfos(wordsBookId: id).shuffled()
         
-        wordList = wordDataManager.retrieveWordsBookInfos(wordsBookId: id).shuffled()
+        switch mode {
+        case .allWords:
+            wordList = list
+        case .unmemorizedWords:
+            wordList = list.filter { !$0.memorizationYn }
+        }
     }
     
     private func configureViews() -> [UIView] {
@@ -122,23 +152,43 @@ class MemorizeController: UIViewController {
             let view = UIView()
             let wordLabel = UILabel()
             let meaningLabel = UILabel()
-            view.backgroundColor = .white
+            
+            view.backgroundColor = .subYellow
             view.layer.cornerRadius = 20
-            view.clipsToBounds = true
+            view.layer.shadowColor = UIColor.black.cgColor
+            view.layer.shadowOpacity = 0.2
+            view.layer.shadowOffset = CGSize(width: 0, height: 2)
+            view.layer.shadowRadius = 4
+            view.layer.masksToBounds = false
+            
             wordLabel.text = "\(word.word ?? "")"
             wordLabel.textColor = .black
+            wordLabel.font = .boldSystemFont(ofSize: 30)
+            
             meaningLabel.text = "\(word.meaning ?? "")"
-            meaningLabel.textColor = .black
+            meaningLabel.textColor = .gray
+            meaningLabel.font = .systemFont(ofSize: 15)
+            meaningLabel.isHidden = true // 처음에는 숨김
+            
             [wordLabel, meaningLabel].forEach {
                 view.addSubview($0)
             }
+            
             wordLabel.snp.makeConstraints {
                 $0.center.equalToSuperview()
             }
+            
             meaningLabel.snp.makeConstraints {
                 $0.centerX.equalTo(wordLabel.snp.centerX)
                 $0.top.equalTo(wordLabel.snp.bottom).offset(30)
             }
+            
+            // UILongPressGestureRecognizer 추가
+            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+            longPressGesture.minimumPressDuration = 0 // 즉시 반응하게 설정
+            wordLabel.addGestureRecognizer(longPressGesture)
+            wordLabel.isUserInteractionEnabled = true
+            
             return view
         }
     }

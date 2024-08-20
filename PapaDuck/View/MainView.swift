@@ -18,15 +18,68 @@ class MainView: UIView {
     var data = [WordsBookEntity]()
     
     // MARK: - UI Components
-    private let titleLabel = UILabel()
-    private let logoImageView = UIImageView(image: UIImage(named: "Logo"))
-    private let bubbleImageView = UIImageView(image: UIImage(named: "bubble"))
-    let addLabel = UILabel()
-    private let paduckImageView = UIImageView(image: UIImage(named: "papaduck"))
-    private let dataEmptyView = UIView()
-    let vocabularyCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    lazy var addVocaButton = UIButton()
-    private let dataStateView = UIView()
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "PAPADUCK"
+        label.font = FontNames.mainFont.font()
+        label.textColor = UIColor.subBlue
+        label.textAlignment = .center
+        return label
+    }()
+
+    private let logoImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "Logo"))
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+
+    private let bubbleImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "bubble"))
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+
+    let addLabel: UILabel = {
+        let label = UILabel()
+        label.text = "단어장을 만들으세요..."
+        label.font = FontNames.main2Font2.font()
+        label.textColor = UIColor.black
+        label.isUserInteractionEnabled = true
+        return label
+    }()
+
+    private let paduckImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "papaduck"))
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+
+    private let dataEmptyView: UIView = {
+        let view = UIView()
+        return view
+    }()
+
+    let vocabularyCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return collectionView
+    }()
+
+    private lazy var addVocaButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor.mainYellow
+        button.setTitle("단어장 추가", for: .normal)
+        button.setTitleColor(.subBlack, for: .normal)
+        button.titleLabel?.font = FontNames.subFont2.font()
+        button.layer.cornerRadius = 8
+        button.addTarget(self, action: #selector(didTapAddVocaButton), for: .touchUpInside)
+        return button
+    }()
+
+    private let dataStateView: UIView = {
+        let view = UIView()
+        return view
+    }()
     
     // MARK: - 초기화
     override init(frame: CGRect) {
@@ -39,28 +92,10 @@ class MainView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+
     
     // MARK: - Setup
     private func setupView() {
-        paduckImageView.contentMode = .scaleAspectFit
-        bubbleImageView.contentMode = .scaleAspectFit
-        
-        titleLabel.text = "PAPADUCK"
-        titleLabel.font = FontNames.mainFont.font()
-        titleLabel.textColor = UIColor.subBlue
-        titleLabel.textAlignment = .center
-        
-        addLabel.text = "단어장을 만들으세요..."
-        addLabel.font = FontNames.main2Font2.font()
-        addLabel.textColor = UIColor.black
-        addLabel.isUserInteractionEnabled = true
-        
-        addVocaButton.backgroundColor = UIColor.mainYellow
-        addVocaButton.setTitle("단어장 추가", for: .normal)
-        addVocaButton.setTitleColor(.subBlack, for: .normal)
-        addVocaButton.titleLabel?.font = FontNames.subFont2.font()
-        addVocaButton.layer.cornerRadius = 8
-        addVocaButton.addTarget(self, action: #selector(didTapAddVocaButton), for: .touchUpInside)
         
         [titleLabel, logoImageView, dataEmptyView, dataStateView].forEach { addSubview($0)}
         [bubbleImageView, paduckImageView, addLabel].forEach { dataEmptyView.addSubview($0)}

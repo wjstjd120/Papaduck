@@ -7,98 +7,148 @@
 
 import UIKit
 import SnapKit
+import CoreData
 
 class MypageViewController: UIViewController {
     
+    let wordsBookCoreDataManager = WordsBookCoreDataManager()
+    let wordsCoreDataManager = WordsCoreDataManager()
     let mypageView = MypageView()
     var selectedDate: DateComponents? = nil
+    var experienceDates: [DateComponents] = []
+    let memorizeController = MemorizeController()
+    let userCoreDataManager = UserCoreDataManager()
+    let userDefaultsManager = UserDefaultsManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view = mypageView
-        updateProgress()
-        lvimageChange()
-        reloadDateView(date: Date())
         calendar()
     }
     
-    //레벨별 고라파덕 머리심어주는 함수
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        registrationNumbers()
+        memorizingNumbers()
+        lvimageChange()
+        loadUserExperience()
+        createWordMarkerToDateView()
+    }
+    
+    // 총 등록단어 갯수 확인
+    private func registrationNumbers() {
+        let readAllDetaNumber = wordsCoreDataManager.retrieveAllWords().count
+        mypageView.registrationnumber.text = "\(readAllDetaNumber)"
+    }
+    
+    // 총 암기한 단어 갯수 확인
+    private func memorizingNumbers() {
+        let memorizedWords = wordsCoreDataManager.retrieveAllWords().filter { $0.memorizationYn == true }
+        mypageView.memorizingnumber.text = "\(memorizedWords.count)"
+    }
+    
+    // 레벨별 이미지 변경 함수
     private func lvimageChange() {
-        if mypageView.lvLabel.text == "Lv.2" {
+        switch mypageView.lvLabel.text {
+        case "Lv.1":
+            mypageView.lvImage.image = .lv1
+        case "Lv.2":
             mypageView.lvImage.image = .lv2
-        }
-        
-        if mypageView.lvLabel.text == "Lv.3" {
+        case "Lv.3":
             mypageView.lvImage.image = .lv3
-        }
-        
-        if mypageView.lvLabel.text == "Lv.4" {
+        case "Lv.4":
             mypageView.lvImage.image = .lv4
-        }
-        
-        if mypageView.lvLabel.text == "Lv.5" {
+        case "Lv.5":
             mypageView.lvImage.image = .lv5
+        default:
+            break
         }
     }
     
+    private func calculateMaxExp() -> Int {
+        let currentLevel = Int(mypageView.lvLabel.text?.replacingOccurrences(of: "Lv.", with: "") ?? "1") ?? 1
+        return 100 + (currentLevel - 1) * 100
+    }
+
+    private func loadUserExperience() {
+        let userExp = userCoreDataManager.retrieveExp().first?.exp ?? "0"
+        let currentExp = Int(userExp) ?? 0
+        let maxExp = calculateMaxExp()
+        
+        mypageView.exLabel.text = "\(currentExp)/\(maxExp)"
+        mypageView.exProgressView.progress = Float(currentExp) / Float(maxExp)
+        
+        if currentExp >= maxExp {
+            levelUp()
+        }
+    }
+
+    private func levelUp() {
+        let currentLevel = Int(mypageView.lvLabel.text?.replacingOccurrences(of: "Lv.", with: "") ?? "1") ?? 1
+        mypageView.lvLabel.text = "Lv.\(currentLevel + 1)"
+        
+        let newMaxExp = calculateMaxExp()
+        
+        mypageView.exLabel.text = "0/\(newMaxExp)"
+        mypageView.exProgressView.progress = 0
+
+        // 유저디폴트 경험치를 0으로 초기화
+        userDefaultsManager.setUserExperience(exp: 0)
+
+        if let userEntity = userCoreDataManager.retrieveExp().first,
+           let currentExpInt = Int(userEntity.exp ?? "0") {
+            // 현재 경험치의 음수 값을 전달하여 0으로 리셋
+            userCoreDataManager.updateExp(plus: -currentExpInt)
+        } else {
+            // 만약 currentExp가 nil이라면, 0으로 리셋
+            userCoreDataManager.updateExp(plus: 0)
+        }
+    }
+    private func createWordMarkerToDateView() {
+        
+        let today = Calendar.current.dateComponents([.day, .month, .year], from: Date())
+        if !experienceDates.contains(today) {
+            experienceDates.append(today)
+            userDefaultsManager.setExperienceDates(dates: experienceDates) // 날짜 저장
+        }
+        reloadDateView(date: Calendar.current.date(from: today))
+    }
+
     private func updateProgress() {
-        // exLabel의 텍스트를 "현재 경험치/최대 경험치"로 반환
         let experienceText = mypageView.exLabel.text?.split(separator: "/")
         guard let currentExp = experienceText?.first, let maxExp = experienceText?.last,
               let currentExpValue = Float(currentExp), let maxExpValue = Float(maxExp) else {
             return
         }
-        
-        // 경험치에 따라 progressView 업데이트
+
         mypageView.exProgressView.progress = currentExpValue / maxExpValue
-        
-        // 경험치가 최대치에 도달하면 레벨업 처리
-        if currentExpValue >= maxExpValue {
-            // 레벨 증가
-            if let currentLevel = Int(mypageView.lvLabel.text?.replacingOccurrences(of: "Lv.", with: "") ?? "1") {
-                mypageView.lvLabel.text = "Lv.\(currentLevel + 1)"
-            }
-            
-            // 경험치 초기화후 레벨업
-            mypageView.exLabel.text = "0/\(Int(maxExpValue + 100))" // 경험치 최대치도 증가한다고 가정
-            mypageView.exProgressView.progress = 0
-            lvimageChange()
-        }
-        
-        // 경험치 증가 메서드를 추가하여 사용자가 경험치를 얻을 때 호출하는 것
-        func setExperience(current: Int, max: Int) {
-            mypageView.exLabel.text = "\(current)/\(max)"
-            updateProgress()  // 진행 상태 업데이트
-        }
     }
     
+    // 캘린더 초기화 및 설정
     private func calendar() {
         mypageView.calendarView.delegate = self
         let dateSelection = UICalendarSelectionSingleDate(delegate: self)
         mypageView.calendarView.selectionBehavior = dateSelection
     }
     
+    // 캘린더에서 날짜에 대해 데코레이션 업데이트
     private func reloadDateView(date: Date?) {
-        if date == nil { return }
+        guard let date = date else { return }
         let calendar = Calendar.current
-        mypageView.calendarView.reloadDecorations(forDateComponents: [calendar.dateComponents([.day, .month, .year], from: date!)], animated: true)
+        let dateComponents = calendar.dateComponents([.day, .month, .year], from: date)
+        mypageView.calendarView.reloadDecorations(forDateComponents: [dateComponents], animated: true)
     }
 }
 
-
-
 extension MypageViewController: UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
-    // 달력의 특정 날짜에 대해 장식을 반환하는 역할
     func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
-        if let selectedDate = selectedDate, selectedDate == dateComponents {
+        if experienceDates.contains(where: { $0.day == dateComponents.day && $0.month == dateComponents.month && $0.year == dateComponents.year }) {
             return .customView {
-                let selectImage = UIImageView(image: UIImage(named: "Logo"))
-                
+                let logoImage = UIImageView(image: UIImage(named: "Logo"))
                 let containerView = UIView()
-                containerView.addSubview(selectImage)
-                
-                selectImage.snp.makeConstraints{
-                    $0.size.equalTo(15)
+                containerView.addSubview(logoImage)
+                logoImage.snp.makeConstraints {
+                    $0.size.equalTo(20)
                     $0.center.equalTo(containerView)
                 }
                 return containerView
@@ -107,7 +157,7 @@ extension MypageViewController: UICalendarViewDelegate, UICalendarSelectionSingl
         return nil
     }
     
-    // 값이 들어왔을때 날짜에 장식을 넣어주는 효과
+    // 날짜 선택 시 데코레이션 업데이트
     func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
         selection.setSelected(dateComponents, animated: true)
         selectedDate = dateComponents
